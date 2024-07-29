@@ -1,0 +1,10 @@
+enum categoryName {
+  Pelicula   @map("Película")
+  Serie
+  Novela
+  Documental
+  Dorama
+  Anime
+  Reality
+  Show
+}

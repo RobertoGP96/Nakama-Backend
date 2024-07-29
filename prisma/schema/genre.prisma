@@ -1,0 +1,26 @@
+model Genre {
+  id       Int       @id @default(autoincrement())
+  createat DateTime  @default(now())
+  updateat DateTime  @updatedAt
+  name     genreName @unique
+}
+
+enum genreName {
+  Accion     @map("Acción")
+  Aventura
+  Animado
+  Comedia
+  Crimen
+  Documental
+  Drama
+  Fantacia   @map("Fantasía")
+  Historico  @map("Histórico")
+  Horror
+  Musical
+  Misterio
+  Romance
+  Sci_Fi     @map("Sci-Fi")
+  Thriller
+  Belica     @map("Bélica")
+  Oeste
+}

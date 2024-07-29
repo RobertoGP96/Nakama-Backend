@@ -1,0 +1,11 @@
+model Ratings {
+  id        Int      @id @default(autoincrement())
+  rating    Decimal
+  votes     Int
+
+  createat  DateTime @default(now())
+  updateat  DateTime @updatedAt
+
+  element   Element @relation(fields: [elementId], references: [id])
+  elementId    Int @unique
+}

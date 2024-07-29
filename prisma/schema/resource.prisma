@@ -1,0 +1,11 @@
+model Resource{
+    id Int @default(autoincrement())
+    address String @unique
+
+    createat DateTime @default(now())
+    updateat DateTime @updatedAt
+
+    e_founds_count Int @default(0)
+    e_pending_count Int @default(0)
+    e_founds Int[] @default([])
+}

@@ -1,0 +1,23 @@
+model Cast {
+    id             Int      @id @default(autoincrement())
+    
+    createat       DateTime @default(now())
+    updateat       DateTime @updatedAt
+    
+    name           String
+    originalName   String
+
+    character      String
+
+    credits   Credits @relation(fields: [creditsId], references: [id])
+    creditsId Int
+
+    department Department
+}
+
+enum Department {
+  ACTOR
+  DIRECTOR
+  ESCRITOR
+  PRODUCTOR
+}

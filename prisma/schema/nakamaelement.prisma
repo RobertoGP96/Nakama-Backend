@@ -1,0 +1,28 @@
+model Element {
+  id    Int    @id @default(autoincrement())
+  year  Int
+
+  poster   String
+  backdrop String
+
+  title String @unique
+  title_original String
+
+  country String
+
+  popularity Float
+
+  external_ids externalids?
+
+  category categoryName
+
+  credits  Credits?
+  metadata Metadata?
+  ratings  Ratings[]
+
+  plot String
+  abstract String
+
+  createat DateTime @default(now())
+  updateat DateTime @updatedAt
+}

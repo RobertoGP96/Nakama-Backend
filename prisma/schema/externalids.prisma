@@ -1,0 +1,27 @@
+model externalids {
+    id         Int      @id @default(autoincrement())
+    createat   DateTime @default(now())
+    updateat   DateTime @updatedAt
+    externalid String
+    type       String
+
+    ids Ids[]
+
+    element   Element? @relation(fields: [elementId], references: [id])
+    elementId Int     @unique
+}
+
+model Ids {
+    id   String       @id
+    name categoryName
+
+    externalids   externalids? @relation(fields: [externalidsId], references: [id])
+    externalidsId Int?
+}
+
+enum companyName {
+    IMDB
+    TMDB
+    OMDB
+    RottemTomatoes
+}
