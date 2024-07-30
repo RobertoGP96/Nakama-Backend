@@ -7,5 +7,4 @@ model Credits {
   elementId      Int @unique
 
   cast_members   Cast[]
-  
 }

@@ -1,6 +1,6 @@
 import { object, number } from 'zod'
 
-export const RatingSchema = object({
+export const CategorySchema = object({
   rating: number({
     invalid_type_error: 'Rating must be a number.',
     required_error: 'Rating is required'

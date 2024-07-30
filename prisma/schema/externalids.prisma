@@ -2,8 +2,6 @@ model externalids {
     id         Int      @id @default(autoincrement())
     createat   DateTime @default(now())
     updateat   DateTime @updatedAt
-    externalid String
-    type       String
 
     ids Ids[]
 
