@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { Resource } from '../controllers/resource.js'
+import { Resource } from '../controllers/resource'
 
 export const ResourceRouter = Router()
 

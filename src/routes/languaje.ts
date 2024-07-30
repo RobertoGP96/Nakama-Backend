@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { Languaje } from '../controllers/languaje.js'
+import { Languaje } from '../controllers/languaje'
 
 export const LanguajeRouter = Router()
 

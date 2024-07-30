@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { Credits } from '../controllers/credits.js'
+import { Credits } from '../controllers/credits'
 
 export const CreditsRouter = Router()
 

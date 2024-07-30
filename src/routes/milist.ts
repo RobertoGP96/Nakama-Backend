@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { MiList } from '../controllers/milist.js'
+import { MiList } from '../controllers/milist'
 
 export const MiListRouter = Router()
 

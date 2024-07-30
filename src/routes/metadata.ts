@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { Metadata } from '../controllers/metadata.js'
+import { Metadata } from '../controllers/metadata'
 
 export const MetadataRouter = Router()
 

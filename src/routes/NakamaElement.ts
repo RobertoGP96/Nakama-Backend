@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { NakamaElementController } from '../controllers/NakamaElement.js'
+import { NakamaElementController } from '../controllers/NakamaElement'
 
 export const NakamaElementRouter = Router()
 

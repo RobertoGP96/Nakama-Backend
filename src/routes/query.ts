@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { Query } from '../controllers/query.js'
+import { Query } from '../controllers/query'
 
 export const QueryRouter = Router()
 

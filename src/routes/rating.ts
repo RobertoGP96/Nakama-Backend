@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { Rating } from '../controllers/rating.js'
+import { Rating } from '../controllers/rating'
 
 export const RatingRouter = Router()
 

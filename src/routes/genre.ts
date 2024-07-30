@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { Genre } from '../controllers/genre.js'
+import { Genre } from '../controllers/genre'
 
 export const GenreRouter = Router()
 

@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { Cast } from '../controllers/cast.ts'
+import { Cast } from '../controllers/cast'
 
 export const CastRouter = Router()
 
