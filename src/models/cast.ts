@@ -1,6 +1,6 @@
 import { Nprisma } from "../../prisma/prisma";
 
-export class Cast {
+export default class Cast {
   static async getAll() {
     const getAll = await Nprisma.cast.findMany();
     return getAll;

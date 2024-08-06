@@ -1,16 +1,18 @@
 model Element {
-  id    Int    @id @default(autoincrement())
-  year  Int
+  id   Int @id
+  year Int
 
   poster   String
   backdrop String
 
-  title String @unique
+  title          String @unique
   title_original String
 
   country String
 
   popularity Float
+
+  genres Genre?
 
   external_ids externalids?
 
@@ -18,9 +20,9 @@ model Element {
 
   credits  Credits?
   metadata Metadata?
-  ratings  Ratings[]
+  ratings  Ratings?
 
-  plot String
+  plot     String
   abstract String
 
   createat DateTime @default(now())

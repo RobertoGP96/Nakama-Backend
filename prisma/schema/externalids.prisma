@@ -3,23 +3,12 @@ model externalids {
     createat   DateTime @default(now())
     updateat   DateTime @updatedAt
 
-    ids Ids[]
-
     element   Element? @relation(fields: [elementId], references: [id])
     elementId Int     @unique
+
+    imdb_id String
+    tmdb_id String
+    rttm_id String
+    mtcr_id String
 }
 
-model Ids {
-    id   String       @id
-    name categoryName
-
-    externalids   externalids? @relation(fields: [externalidsId], references: [id])
-    externalidsId Int?
-}
-
-enum companyName {
-    IMDB
-    TMDB
-    OMDB
-    RottemTomatoes
-}

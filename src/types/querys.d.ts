@@ -1,13 +1,7 @@
-interface NakamaQuery {
-  id: string
-  idUser: string
-  content: queryElement[]
-  createat: string
-  updateat: string
-  state: string
-}
-
-interface queryElement {
-  infoID: string
-  note: null | string
+interface Query {
+  id: string;
+  user_id: string;
+  elements: Element[];
+  state: string;
+  description: null | string;
 }

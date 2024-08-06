@@ -1,9 +1,10 @@
 interface resourceItem {
-  addres: string
-  id: string
-  type: string
-  createat: string
-  updateat: string
-  elementsfound: number
-  elementspending: number
-};
+  id: string;
+  addres: string;
+  
+  type: string;
+
+  e_found: number;
+  e_pending: number;
+  e_ids: number[];
+}

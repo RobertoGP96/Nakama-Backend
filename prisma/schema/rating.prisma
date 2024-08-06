@@ -1,11 +1,16 @@
 model Ratings {
-  id        Int      @id @default(autoincrement())
-  rating    Decimal
-  votes     Int
+  id Int @id @default(autoincrement())
 
-  createat  DateTime @default(now())
-  updateat  DateTime @updatedAt
+  imdb_rating   Decimal
+  imdb_votes    Int
+  rotten_rating Decimal
+  rotten_votes  Int
+  mc_rating     Decimal
+  mc_votes      Int
+
+  createat DateTime @default(now())
+  updateat DateTime @updatedAt
 
   element   Element @relation(fields: [elementId], references: [id])
-  elementId    Int @unique
+  elementId Int     @unique
 }

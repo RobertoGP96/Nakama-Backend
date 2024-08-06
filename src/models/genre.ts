@@ -12,10 +12,21 @@ export class genre {
     return await Nprisma.genre.create(input)
   }
 
-  static async delete (id) {
-    return await Nprisma.genre.delete(id)
+  static async delete (id: number) {
+    return await Nprisma.genre.delete({
+      where:{
+        id: id
+      }
+    })
   }
-  static async update ({ input }) {
-    return await Nprisma.genre.update(input)
+  static async update ({ id, input }:{id: number, }) {
+    return await Nprisma.genre.update({
+      where: {
+        id: id
+      },
+      data: {
+        
+      }
+    })
   }
 }
