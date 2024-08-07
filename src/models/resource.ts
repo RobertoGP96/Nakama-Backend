@@ -1,7 +1,7 @@
 import { Nprisma } from "../../prisma/prisma";
 import { resourceItem } from "../types/resources";
 
-export class Resource {
+export default class Resource {
   static async getAll() {
     return await Nprisma.credits.findMany();
   }

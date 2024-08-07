@@ -1,6 +1,6 @@
 import { Nprisma } from "../../prisma/prisma";
 
-export class MiList {
+export default class MiList {
   static async getAll() {
     return await Nprisma.miList.findMany();
   }

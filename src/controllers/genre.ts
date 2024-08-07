@@ -1,5 +1,12 @@
+import genre from '../models/genre'
 export class Genre {
-  static async getAll (req, res) {}
-  static async getByID (req, res) {}
-  static async update (req, res) {}
+  static async getAll (_req, res) {
+    const all = genre.getAll()
+    return res.status(201).json(all)
+  }
+  static async getByID (req, res) {
+    const { id } = req.params
+    const getbyId = await genre.getByID({ id })
+    return res.status(201).json(getbyId)
+  }
 }

@@ -1,6 +1,6 @@
 import { Nprisma } from "../../prisma/prisma"
 
-export class genre {
+export default class genre {
   static async getAll () {
     return await Nprisma.genre.findMany()
   }

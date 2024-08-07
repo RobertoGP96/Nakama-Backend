@@ -1,5 +1,5 @@
 import { Nprisma } from "../../prisma/prisma";
-export class Credits {
+export default class Credits {
   static async getAll () {
     return await Nprisma.credits.findMany()
   }

@@ -1,6 +1,6 @@
 import { Nprisma } from "../../prisma/prisma";
 
-export class Query {
+export default class Query {
   static async getAll() {
     return await Nprisma.query.findMany();
   }
@@ -18,14 +18,26 @@ export class Query {
         description: input.description,
         userId: uId,
         elements: input.elements,
+        state: input.state
       },
     });
   }
 
   static async delete({ id }) {
-    return await Nprisma.query.delete(id);
+    return await Nprisma.query.delete({
+      where:{
+        id: id
+      }
+    });
   }
-  static async update({ input }) {
-    return await Nprisma.query.update(input);
+  
+  static async update({ id, input }: {id: string, input: query}) {
+    return await Nprisma.query.update({where:{
+      id:id
+    },data:{
+      description: input.description,
+      state: input.state,
+      elements: input.elements
+    }});
   }
 }
