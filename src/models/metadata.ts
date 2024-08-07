@@ -5,17 +5,11 @@ export class MetaData {
     return await Nprisma.metadata.findMany()
   }
 
-  static async getByID (id) {
-    return await Nprisma.metadata.findUnique(id)
-  }
-  static async create ({ input }) {
-    return await Nprisma.metadata.create(input)
-  }
-
-  static async delete (id) {
-    return await Nprisma.metadata.delete(id)
-  }
-  static async update ({ input }) {
-    return await Nprisma.metadata.update(input)
+  static async getByID ({id}:{id : number}) {
+    return await Nprisma.metadata.findUnique({
+      where:{
+        id: id
+      }
+    })
   }
 }

@@ -1,6 +1,6 @@
-interface MiList {
+interface miList {
   id: string
 
   user_id: string
-  elements: Element[]
+  elements: number[]
 }

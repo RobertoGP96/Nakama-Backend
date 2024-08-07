@@ -5,17 +5,11 @@ export class Rating {
     return await Nprisma.ratings.findMany()
   }
 
-  static async getByID (id) {
-    return await Nprisma.ratings.findUnique(id)
-  }
-  static async create ({ input }) {
-    return await Nprisma.ratings.create(input)
-  }
-
-  static async delete (id) {
-    return await Nprisma.ratings.delete(id)
-  }
-  static async update ({ input }) {
-    return await Nprisma.ratings.update(input)
+  static async getByID ({ id }:{ id: number}) {
+    return await Nprisma.ratings.findUnique({
+      where:{
+        id: id
+      }
+    })
   }
 }

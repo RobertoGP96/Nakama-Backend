@@ -1,7 +1,7 @@
-interface Query {
+interface query {
   id: string;
   user_id: string;
-  elements: Element[];
+  elements: number[];
   state: string;
-  description: null | string;
+  description: string;
 }

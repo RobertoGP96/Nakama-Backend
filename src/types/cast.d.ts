@@ -1,14 +1,10 @@
+import { Department } from "@prisma/client"
+
 interface Cast {
     id: null | number
     name: string
-    og_name: string
+    originalName: string
     character: string
-    deparment: department
+    deparment: Department
     credits_id: number
-}
-
-enum department {
-    "Director",
-    "Actor",
-    "Escritor"
 }

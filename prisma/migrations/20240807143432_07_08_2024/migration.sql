@@ -1,9 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
 -- CreateEnum
 CREATE TYPE "Department" AS ENUM ('ACTOR', 'DIRECTOR', 'ESCRITOR', 'PRODUCTOR');
 
@@ -11,13 +5,7 @@ CREATE TYPE "Department" AS ENUM ('ACTOR', 'DIRECTOR', 'ESCRITOR', 'PRODUCTOR');
 CREATE TYPE "categoryName" AS ENUM ('Película', 'Serie', 'Novela', 'Documental', 'Dorama', 'Anime', 'Reality', 'Show');
 
 -- CreateEnum
-CREATE TYPE "companyName" AS ENUM ('IMDB', 'TMDB', 'OMDB', 'RottemTomatoes');
-
--- CreateEnum
 CREATE TYPE "genreName" AS ENUM ('Acción', 'Aventura', 'Animado', 'Comedia', 'Crimen', 'Documental', 'Drama', 'Fantasía', 'Histórico', 'Horror', 'Musical', 'Misterio', 'Romance', 'Sci-Fi', 'Thriller', 'Bélica', 'Oeste');
-
--- DropTable
-DROP TABLE "public"."User";
 
 -- CreateTable
 CREATE TABLE "Cast" (
@@ -49,25 +37,19 @@ CREATE TABLE "externalids" (
     "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updateat" TIMESTAMP(3) NOT NULL,
     "elementId" INTEGER NOT NULL,
+    "imdb_id" TEXT NOT NULL,
+    "tmdb_id" TEXT NOT NULL,
+    "rttm_id" TEXT NOT NULL,
+    "mtcr_id" TEXT NOT NULL,
 
     CONSTRAINT "externalids_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Ids" (
-    "id" TEXT NOT NULL,
-    "name" "categoryName" NOT NULL,
-    "externalidsId" INTEGER,
-
-    CONSTRAINT "Ids_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Genre" (
     "id" SERIAL NOT NULL,
-    "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updateat" TIMESTAMP(3) NOT NULL,
-    "name" "genreName" NOT NULL,
+    "genres" "genreName"[],
+    "elementId" INTEGER NOT NULL,
 
     CONSTRAINT "Genre_pkey" PRIMARY KEY ("id")
 );
@@ -102,7 +84,7 @@ CREATE TABLE "MiList" (
 
 -- CreateTable
 CREATE TABLE "Element" (
-    "id" SERIAL NOT NULL,
+    "id" INTEGER NOT NULL,
     "year" INTEGER NOT NULL,
     "poster" TEXT NOT NULL,
     "backdrop" TEXT NOT NULL,
@@ -121,7 +103,7 @@ CREATE TABLE "Element" (
 
 -- CreateTable
 CREATE TABLE "Query" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updateat" TIMESTAMP(3) NOT NULL,
@@ -134,8 +116,12 @@ CREATE TABLE "Query" (
 -- CreateTable
 CREATE TABLE "Ratings" (
     "id" SERIAL NOT NULL,
-    "rating" DECIMAL(65,30) NOT NULL,
-    "votes" INTEGER NOT NULL,
+    "imdb_rating" DECIMAL(65,30) NOT NULL,
+    "imdb_votes" INTEGER NOT NULL,
+    "rotten_rating" DECIMAL(65,30) NOT NULL,
+    "rotten_votes" INTEGER NOT NULL,
+    "mc_rating" DECIMAL(65,30) NOT NULL,
+    "mc_votes" INTEGER NOT NULL,
     "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updateat" TIMESTAMP(3) NOT NULL,
     "elementId" INTEGER NOT NULL,
@@ -147,6 +133,7 @@ CREATE TABLE "Ratings" (
 CREATE TABLE "Resource" (
     "id" SERIAL NOT NULL,
     "address" TEXT NOT NULL,
+    "type" "categoryName" NOT NULL,
     "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updateat" TIMESTAMP(3) NOT NULL,
     "e_founds_count" INTEGER NOT NULL DEFAULT 0,
@@ -176,7 +163,7 @@ CREATE UNIQUE INDEX "Credits_elementId_key" ON "Credits"("elementId");
 CREATE UNIQUE INDEX "externalids_elementId_key" ON "externalids"("elementId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Genre_name_key" ON "Genre"("name");
+CREATE UNIQUE INDEX "Genre_elementId_key" ON "Genre"("elementId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Metadata_elementId_key" ON "Metadata"("elementId");
@@ -188,7 +175,13 @@ CREATE UNIQUE INDEX "MiList_userId_key" ON "MiList"("userId");
 CREATE UNIQUE INDEX "Element_title_key" ON "Element"("title");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Query_id_key" ON "Query"("id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Ratings_elementId_key" ON "Ratings"("elementId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Resource_id_key" ON "Resource"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Resource_address_key" ON "Resource"("address");
@@ -209,7 +202,7 @@ ALTER TABLE "Credits" ADD CONSTRAINT "Credits_elementId_fkey" FOREIGN KEY ("elem
 ALTER TABLE "externalids" ADD CONSTRAINT "externalids_elementId_fkey" FOREIGN KEY ("elementId") REFERENCES "Element"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Ids" ADD CONSTRAINT "Ids_externalidsId_fkey" FOREIGN KEY ("externalidsId") REFERENCES "externalids"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Genre" ADD CONSTRAINT "Genre_elementId_fkey" FOREIGN KEY ("elementId") REFERENCES "Element"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Metadata" ADD CONSTRAINT "Metadata_elementId_fkey" FOREIGN KEY ("elementId") REFERENCES "Element"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

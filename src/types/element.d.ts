@@ -1,29 +1,33 @@
-interface Elment {
+import { categoryName } from "@prisma/client";
+import { Ratings } from "./ratings";
+import { Genre } from "./data";
+
+interface element {
   id: number;
-  year: null | string;
+  year: number;
   country: string;
 
-  backdrop_path: undefined | string;
-  poster_path: undefined | string;
+  backdrop_path: string;
+  poster_path: string;
 
-  Category: undefined | string;
+  Category: categoryName;
 
   popularity: number;
 
-  genres_id: undefined | number;
+  genres: GenreC;
 
-  imdb_id: undefined | string | null;
-  imdbRating: undefined | number;
-  imdbVotes: undefined | number;
+  imdb_id: string;
+  imdbRating:  number;
+  imdbVotes: number;
 
-  title: undefined | string;
-  original_title: undefined | string;
+  title: string;
+  original_title: string;
 
-  credits_id: undefined | null | number;
-  externalids_id: undefined | null | number;
-  metadata_id: undefined | null | number;
-  ratings_id: undefined | null | number;
+  credits: Credits ;
+  externalids: ExternalIds;
+  metadata:  Metadata;
+  ratings:  Ratings;
 
   plot: string;
-  abstract: undefined | string;
+  abstract: string;
 }

@@ -1,5 +1,5 @@
 model Element {
-  id   Int @id
+  id   Int @id @default(autoincrement()) @unique
   year Int
 
   poster   String
