@@ -1,4 +1,4 @@
-# Nombre de tu Proyecto
+# Nakama Backend
 
 ![Logo de tu Proyecto](ruta/al/logo.png)
 
@@ -14,13 +14,6 @@ Este es un proyecto de API REST construido con **Express**, **Prisma** y **TypeS
 
 ## Requisitos
 
-- Node.js (versión 14 o superior)
-- npm o yarn
-- Base de datos (PostgreSQL, MySQL, etc.)
-
-## Instalación
-
-1. Clona el repositorio:
-
-   ```bash
-   git clone https://github.com/tu_usuario/tu_repositorio.git
+- Node.js (versión 22 o superior)
+- npm
+- Base de datos (PostgreSQL)
