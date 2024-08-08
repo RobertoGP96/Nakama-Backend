@@ -7,12 +7,20 @@ export class MiList {
   static async getByID(req, res) {
     const { id } = req.params
     const getbyId = await milist.getByID({ id })
+    
+    if(!getbyId)
+      return  res.status(400).json({ message: 'List not found' })
+
     return res.status(201).json(getbyId)
   }
   static async delete (req, res) {
     const { id } = req.params
     const deleted = await milist.delete({ id })
-    res.status(201).json(deleted)
+
+    if(!deleted)
+      return  res.status(400).json({ message: 'List not found' })
+
+    return res.status(201).json({ message: 'List deleted' })
   }
   static async create (req, res) {
     const { id:uId } = req.params
