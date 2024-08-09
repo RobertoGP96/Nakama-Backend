@@ -5,8 +5,14 @@ export class Metadata {
     return res.status(201).json(all);
   }
   static async getByID(req, res) {
-    const { id } = req.params;
-    const getbyId = await metadata.getByID({ id });
-    return res.status(201).json(getbyId);
+    const { id } = req.params
+    const numId = Number(id)
+    
+    const getbyId = await metadata.getByID({ id: numId })
+    
+    if(!getbyId)
+      return res.staus(400).json({message: "Metadata id not found"})
+    
+    return  res.status(201).json(getbyId)
   }
 }

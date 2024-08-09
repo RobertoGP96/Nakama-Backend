@@ -1,6 +1,6 @@
 model Resource {
     id      Int    @default(autoincrement()) @unique
-    address String @unique
+    addres String @unique
 
     type categoryName
 

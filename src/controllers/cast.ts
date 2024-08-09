@@ -5,9 +5,15 @@ export class Cast {
     const getall = await cast.getAll()
     return  _res.status(201).json(getall)
   }
-  static async getByID(_req, _res) {
+  static async getByID(_req, res) {
     const { id } = _req.params
-    const getbyId = await cast.getByID({ id })
-    return  _res.status(201).json(getbyId)
+    const numId = Number(id)
+    
+    const getbyId = await cast.getByID({ id: numId })
+    
+    if(!getbyId)
+      return res.staus(400).json({message: "Cast id not found"})
+    
+    return  res.status(201).json(getbyId)
   }
 }

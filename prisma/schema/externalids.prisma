@@ -8,7 +8,6 @@ model externalids {
 
     imdb_id String
     tmdb_id String
-    rttm_id String
-    mtcr_id String
+    omdb_id String
 }
 

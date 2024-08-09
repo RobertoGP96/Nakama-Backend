@@ -5,7 +5,7 @@ export const CastSchema = object({
     invalid_type_error: 'Rating must be a string.',
     required_error: 'Rating is required'
   }),
-  original_name: string({
+  originalName: string({
     invalid_type_error: 'Original Name must be a string.',
     required_error: 'Character is required'
   }),
@@ -13,14 +13,8 @@ export const CastSchema = object({
     invalid_type_error: 'Character must be a string.',
     required_error: 'Character is required'
   }),
-  creditsId: number(
-    {
-      invalid_type_error: 'Credits_id must be a number.',
-      required_error: 'Credits_id is required'
-    }
-  ),
   department: string({
     invalid_type_error: 'Department must be string.',
-    required_error: 'Department is required.'
+    required_error: 'Department is required.',
   })
 })

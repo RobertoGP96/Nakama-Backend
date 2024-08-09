@@ -6,8 +6,14 @@ export class Rating {
   }
   static async getByID (req, res) {
     const { id } = req.params
-    const getbyId = await rating.getByID({ id })
-    return res.status(201).json(getbyId)
+    const numId = Number(id)
+    
+    const getbyId = await rating.getByID({ id: numId })
+    
+    if(!getbyId)
+      return res.staus(400).json({message: "Rating id not found"})
+    
+    return  res.status(201).json(getbyId)
   }
 }
  

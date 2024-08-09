@@ -6,7 +6,13 @@ export class Genre {
   }
   static async getByID (req, res) {
     const { id } = req.params
-    const getbyId = await genre.getByID({ id })
-    return res.status(201).json(getbyId)
+    const numId = Number(id)
+    
+    const getbyId = await genre.getByID({ id: numId })
+    
+    if(!getbyId)
+      return res.staus(400).json({message: "Genre id not found"})
+    
+    return  res.status(201).json(getbyId)
   }
 }

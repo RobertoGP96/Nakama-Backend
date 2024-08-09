@@ -13,6 +13,8 @@ import { CreditsRouter } from './routes/credits'
 const app = express()
 const port = 3000
 
+app.use(express.json());
+
 app.disable('x-powered-by')
 
 app.get('/', (_req, res) => {

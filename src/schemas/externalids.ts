@@ -1,29 +1,16 @@
 import z from 'zod'
 
 export const ExternalIdsSchema = z.object({
-  external_id: z.string({
-    invalid_type_error: 'Rating must be a number.',
-    required_error: 'Rating is required'
+  imdb_id: z.string({
+    invalid_type_error: 'Imdb must be a string.',
+    required_error: 'Imdb is required'
   }),
-  votes: z.number({
-    invalid_type_error: 'Votes must be a number.',
-    required_error: 'Votes is required'
+  tmdb_id: z.string({
+    invalid_type_error: 'Tmdb must be a string.',
+    required_error: 'Imdb is required'
   }),
-  elementId: z.number({
-    invalid_type_error: 'Element_id must be a number.',
-    required_error: 'Element_id is required'
+  omdb_id: z.string({
+    invalid_type_error: 'Omdb must be a string.'
   })
 })
 
-export const Ids = z.object({
-  external_id: z.string({
-    invalid_type_error: 'Rating must be a number.',
-    required_error: 'Rating is required'
-  })
-})
-
-enum companyName {
-  IMDB,
-  OMDB,
-  RottemTomatoes,
-}

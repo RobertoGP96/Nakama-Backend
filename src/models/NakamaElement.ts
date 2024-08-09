@@ -43,9 +43,8 @@ export default class NakamaElementModel {
         external_ids: {
           create: {
             imdb_id: input.externalids.imdb_id,
-            rttm_id: input.externalids.rttm_id,
-            mtcr_id: input.externalids.mtcr_id,
             tmdb_id: input.externalids.tmdb_id,
+            omdb_id: input.externalids.omdb_id,
           },
         },
 
