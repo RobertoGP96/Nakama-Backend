@@ -42,8 +42,17 @@ export default class Resource {
         e_pending_count: input.e_pending,
         e_founds: input.e_ids,
         type: input.type,
-        createat: Date()
+
       },
     });
+  }
+  static async uqcheck({ addres }:{ addres: string}): Promise<boolean> {
+    const findUniq= Nprisma.resource.findUnique({
+      where:{
+        addres: addres
+      }
+    })
+    
+    return await findUniq? (false): (true) 
   }
 }

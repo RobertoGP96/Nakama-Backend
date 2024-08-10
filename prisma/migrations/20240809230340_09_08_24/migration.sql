@@ -39,8 +39,7 @@ CREATE TABLE "externalids" (
     "elementId" INTEGER NOT NULL,
     "imdb_id" TEXT NOT NULL,
     "tmdb_id" TEXT NOT NULL,
-    "rttm_id" TEXT NOT NULL,
-    "mtcr_id" TEXT NOT NULL,
+    "omdb_id" TEXT NOT NULL,
 
     CONSTRAINT "externalids_pkey" PRIMARY KEY ("id")
 );
@@ -84,7 +83,7 @@ CREATE TABLE "MiList" (
 
 -- CreateTable
 CREATE TABLE "Element" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "year" INTEGER NOT NULL,
     "poster" TEXT NOT NULL,
     "backdrop" TEXT NOT NULL,
@@ -107,6 +106,7 @@ CREATE TABLE "Query" (
     "description" TEXT NOT NULL,
     "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updateat" TIMESTAMP(3) NOT NULL,
+    "state" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "elements" INTEGER[],
 
@@ -132,7 +132,7 @@ CREATE TABLE "Ratings" (
 -- CreateTable
 CREATE TABLE "Resource" (
     "id" SERIAL NOT NULL,
-    "address" TEXT NOT NULL,
+    "addres" TEXT NOT NULL,
     "type" "categoryName" NOT NULL,
     "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updateat" TIMESTAMP(3) NOT NULL,
@@ -172,6 +172,9 @@ CREATE UNIQUE INDEX "Metadata_elementId_key" ON "Metadata"("elementId");
 CREATE UNIQUE INDEX "MiList_userId_key" ON "MiList"("userId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Element_id_key" ON "Element"("id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Element_title_key" ON "Element"("title");
 
 -- CreateIndex
@@ -184,7 +187,7 @@ CREATE UNIQUE INDEX "Ratings_elementId_key" ON "Ratings"("elementId");
 CREATE UNIQUE INDEX "Resource_id_key" ON "Resource"("id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Resource_address_key" ON "Resource"("address");
+CREATE UNIQUE INDEX "Resource_addres_key" ON "Resource"("addres");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");

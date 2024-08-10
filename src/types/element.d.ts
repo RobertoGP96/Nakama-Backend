@@ -16,10 +16,6 @@ interface element {
 
   genres: GenreC;
 
-  imdb_id: string;
-  imdbRating:  number;
-  imdbVotes: number;
-
   title: string;
   original_title: string;
 

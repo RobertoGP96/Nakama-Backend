@@ -10,6 +10,7 @@ interface resourceItem {
   e_pending: number;
   e_ids: number[];
 }
+
 enum categoryR {
   "Película",
   "Serie",
