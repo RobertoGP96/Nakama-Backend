@@ -1,8 +1,8 @@
 import { Router } from 'express'
 
-import { Metadata } from '../controllers/metadata'
+import { MetadataController } from '../controllers/metadata'
 
 export const MetadataRouter = Router()
 
-MetadataRouter.get('/', Metadata.getAll)
-MetadataRouter.get('/:id', Metadata.getByID)
+MetadataRouter.get('/', MetadataController.getAll)
+MetadataRouter.get('/:id', MetadataController.getByID)

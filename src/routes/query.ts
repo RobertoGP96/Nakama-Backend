@@ -1,12 +1,12 @@
 import { Router } from 'express'
 
-import { Query } from '../controllers/query'
+import { QueryController } from '../controllers/query'
 
 export const QueryRouter = Router()
 
-QueryRouter.get('/', Query.getAll)
-QueryRouter.get('/:id', Query.getByID)
-QueryRouter.post('/:id', Query.create)
+QueryRouter.get('/', QueryController.getAll)
+QueryRouter.get('/:id', QueryController.getByID)
+QueryRouter.post('/', QueryController.create)
 
-QueryRouter.delete('/:id', Query.delete)
-QueryRouter.put('/:id', Query.update)
+QueryRouter.delete('/:id', QueryController.delete)
+QueryRouter.put('/:id', QueryController.update)

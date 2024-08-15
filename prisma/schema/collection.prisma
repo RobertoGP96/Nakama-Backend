@@ -1,0 +1,9 @@
+model Collection{
+    id String @id @default(cuid())
+    title String
+    description String
+    contents Int[]
+
+    createdat DateTime @default(now())
+    updatedat DateTime @updatedAt
+}

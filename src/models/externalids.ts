@@ -1,6 +1,6 @@
 import { Nprisma } from "../../prisma/prisma"
 
-export default class ExtermalIds {
+export class ExtermalIdsModel {
   static async getAll () {
     return await Nprisma.externalids.findMany()
   }

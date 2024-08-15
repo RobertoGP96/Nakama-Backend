@@ -6,9 +6,9 @@ interface resourceItem {
   
   type: categoryName;
 
-  e_found: number;
-  e_pending: number;
-  e_ids: number[];
+  e_found_count: number;
+  e_pending_count: number;
+  e_founds: number[];
 }
 
 enum categoryR {
@@ -21,3 +21,5 @@ enum categoryR {
   "Reality",
   "Show"
 }
+
+type editResourse = Omit<resourceItem, 'id'>

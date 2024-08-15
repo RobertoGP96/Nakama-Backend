@@ -2,7 +2,7 @@ import { number } from "zod";
 
 interface Ratings {
   id: number;
-  element_id: number;
+  elementId: number;
 
   imdb_rating: number;
   imdb_votes: number;
@@ -11,3 +11,4 @@ interface Ratings {
   mc_rating: number;
   mc_votes: number;
 }
+type createRating = Omit<Ratings, 'id' | 'elementId'>

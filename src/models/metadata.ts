@@ -1,6 +1,6 @@
 import { Nprisma } from "../../prisma/prisma"
 
-export default class MetaData {
+export class MetaDataModel {
   static async getAll () {
     return await Nprisma.metadata.findMany()
   }

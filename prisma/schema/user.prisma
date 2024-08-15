@@ -1,11 +1,11 @@
 model User {
   id String @id @default(cuid())
 
-  phone String
+  phone String @unique
   email String @unique
 
   nickname String @unique
-  name     String
+  username String
   lastname String
 
   password String

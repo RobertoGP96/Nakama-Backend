@@ -12,5 +12,8 @@ export const ExternalIdsSchema = z.object({
   omdb_id: z.string({
     invalid_type_error: 'Omdb must be a string.'
   })
-})
+}).partial()
 
+export function validateExternalIds(input) {
+  return ExternalIdsSchema.safeParse(input)
+}

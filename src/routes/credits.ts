@@ -1,8 +1,8 @@
 import { Router } from 'express'
 
-import { Credits } from '../controllers/credits'
+import { CreditsController } from '../controllers/credits'
 
 export const CreditsRouter = Router()
 
-CreditsRouter.get('/', Credits.getAll)
-CreditsRouter.get('/:id', Credits.getByID)
+CreditsRouter.get('/', CreditsController.getAll)
+CreditsRouter.get('/:id', CreditsController.getByID)

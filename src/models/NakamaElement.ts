@@ -1,7 +1,7 @@
 import { Nprisma } from "../../prisma/prisma";
-import { element } from "../types/element";
+import { createElement, editElement, Element } from "../types/element";
 
-export default class NakamaElementModel {
+export class NakamaElementModel {
   static async getAll() {
     return await Nprisma.element.findMany();
   }
@@ -13,7 +13,7 @@ export default class NakamaElementModel {
       },
     });
   }
-  static async create({ input }: { input: element }) {
+  static async create({ input }: { input: createElement }) {
     return await Nprisma.element.create({
       data: {
         abstract: input.abstract,
@@ -35,26 +35,16 @@ export default class NakamaElementModel {
         //Generos
         genres: {
           create: {
-            genres: input.genres,
+            genres: input.genres.genres
+            },
           },
-        },
-
+        
         //ExternalIDS
         external_ids: {
           create: {
             imdb_id: input.externalids.imdb_id,
             tmdb_id: input.externalids.tmdb_id,
             omdb_id: input.externalids.omdb_id,
-          },
-        },
-
-        //Credits
-
-        credits: {
-          create: {
-            cast_members: {
-              create: input.credits.cast_members,
-            },
           },
         },
 
@@ -67,13 +57,35 @@ export default class NakamaElementModel {
             fps: input.metadata.fps,
             resolution: input.metadata.resolution,
             storage: input.metadata.storage,
-            subtitle: input.metadata.subt,
+            subtitle: input.metadata.subtitle,
           },
         },
+        
+        //Ratings
+        ratings: {
+          create:{
+            imdb_rating: input.ratings.imdb_rating,
+            imdb_votes: input.ratings.imdb_votes,
+            mc_rating: input.ratings.mc_rating,
+            mc_votes: input.ratings.mc_votes,
+            rotten_rating: input.ratings.rotten_rating,
+            rotten_votes: input.ratings.rotten_votes,
+          }
+        },
+
+        //Credits
+        credits: {
+          create: {
+            cast_members: {
+              create: input.credits.cast_members,
+            },
+          },
+        },
+
       },
     });
   }
-
+  
   static async delete({ id }: { id: number }) {
     return await Nprisma.element.delete({
       where: {
@@ -81,7 +93,8 @@ export default class NakamaElementModel {
       },
     });
   }
-  static async update({ id, input }: { id: number; input: element }) {
+
+  static async update({ id, input }: { id: number; input: editElement }) {
     return await Nprisma.element.update({
       where: {
         id: id,
@@ -102,7 +115,6 @@ export default class NakamaElementModel {
         popularity: input.popularity,
 
         country: input.country,
-        
       },
     });
   }

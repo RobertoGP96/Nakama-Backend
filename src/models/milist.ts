@@ -1,6 +1,6 @@
 import { Nprisma } from "../../prisma/prisma";
 
-export default class MiList {
+export class MiListModel {
   static async getAll() {
     return await Nprisma.miList.findMany();
   }
@@ -12,7 +12,7 @@ export default class MiList {
       },
     });
   }
-  static async create({ uId, input }: { uId: string; input: miList }) {
+  static async create({ uId, input }: { uId: string; input: MiList }) {
     return await Nprisma.miList.create({
       data: {
         userId: uId,
@@ -28,14 +28,15 @@ export default class MiList {
       },
     });
   }
-  static async update({ id, input }: { id: string; input: miList }) {
+  static async update({ id, input }: { id: string; input: editMilist }) {
     return await Nprisma.miList.update({
       where: {
         id: id,
       },
       data: {
-        elements: input.elements,
+        ...input
       },
     });
   }
+  
 }

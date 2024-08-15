@@ -1,8 +1,8 @@
 import { Router } from 'express'
 
-import { Rating } from '../controllers/rating'
+import { RatingController } from '../controllers/rating'
 
 export const RatingRouter = Router()
 
-RatingRouter.get('/', Rating.getAll)
-RatingRouter.get('/:id', Rating.getByID)
+RatingRouter.get('/', RatingController.getAll)
+RatingRouter.get('/:id', RatingController.getByID)

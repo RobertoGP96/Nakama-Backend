@@ -1,8 +1,8 @@
 import { Router } from 'express'
 
-import { Cast } from '../controllers/cast'
+import { CastController } from '../controllers/cast'
 
 export const CastRouter = Router()
 
-CastRouter.get('/', Cast.getAll)
-CastRouter.get('/:id', Cast.getByID)
+CastRouter.get('/', CastController.getAll)
+CastRouter.get('/:id', CastController.getByID)

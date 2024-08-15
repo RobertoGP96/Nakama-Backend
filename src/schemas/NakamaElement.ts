@@ -13,12 +13,14 @@ export const ElementSchema = z.object({
   country: z.string({
     invalid_type_error: "Country must be a number",
   }),
-  backdrop_path: z.string({
+  backdrop_path: z
+    .string({
       invalid_type_error: "Backdrop must be a number",
       required_error: "Backdrop is required",
     })
     .url(),
-  poster_path: z.string({
+  poster_path: z
+    .string({
       invalid_type_error: "Poster must be a number",
       required_error: "Poster is required",
     })
@@ -54,4 +56,8 @@ export const ElementSchema = z.object({
   externalids: ExternalIdsSchema.required(),
   metadata: MetadataSchema.required(),
   ratings: RatingSchema.required(),
-});
+}).partial();
+
+export function validateElement(input) {
+  return ElementSchema.safeParse(input);
+}

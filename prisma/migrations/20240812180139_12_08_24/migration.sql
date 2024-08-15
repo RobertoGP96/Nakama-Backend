@@ -22,6 +22,18 @@ CREATE TABLE "Cast" (
 );
 
 -- CreateTable
+CREATE TABLE "Collection" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "contents" INTEGER[],
+    "createdat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedat" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Collection_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Credits" (
     "id" SERIAL NOT NULL,
     "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -147,7 +159,7 @@ CREATE TABLE "User" (
     "phone" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "nickname" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
     "lastname" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -169,9 +181,6 @@ CREATE UNIQUE INDEX "Genre_elementId_key" ON "Genre"("elementId");
 CREATE UNIQUE INDEX "Metadata_elementId_key" ON "Metadata"("elementId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "MiList_userId_key" ON "MiList"("userId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Element_id_key" ON "Element"("id");
 
 -- CreateIndex
@@ -188,6 +197,9 @@ CREATE UNIQUE INDEX "Resource_id_key" ON "Resource"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Resource_addres_key" ON "Resource"("addres");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_phone_key" ON "User"("phone");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");

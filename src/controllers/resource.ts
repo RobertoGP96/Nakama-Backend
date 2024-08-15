@@ -1,65 +1,103 @@
-import { number } from "zod";
-import resource from "../models/resource";
+import { ResourceModel } from "../models/resource";
 import { validateResource } from "../schemas/resource";
-export class Resource {
+export class ResourceController {
   static async getAll(_req, res) {
-    const getall = await resource.getAll();
-    return res.status(200).json(getall);
+    const getall = await ResourceModel.getAll();
+
+    if (!getall) {
+      return res.status(404).json({ message: "Is Empty" });
+    } else {
+      res.status(200).json(getall);
+    }
   }
   static async getByID(req, res) {
     const { id } = req.params;
-    const numbId = parseInt(id, 10);
-    const getbyId = await resource.getByID({ id: numbId });
-    res.status(201).json(getbyId);
+    const numbId = Number(id);
+    const getbyId = await ResourceModel.getByID({ id: numbId });
+    //Id check
+    if (!getbyId) {
+      return res.status(400).json({ message: "Id not foud" });
+    } else {
+      res.status(200).json(getbyId);
+    }
   }
+  
   static async delete(req, res) {
     const { id } = req.params;
     const numbId = Number(id);
-    const idCheck = await resource.getByID({ id: numbId });
+    //Check ID
+    const idCheck = await ResourceModel.getByID({ id: numbId });
     if (!idCheck) {
       return res.status(400).json({ message: "Id not foud" });
     } else {
-      const deleted = await resource.delete({ id: numbId });
-      return res.status(200).json(deleted);
+      try {
+        var deleted = await ResourceModel.delete({ id: numbId });
+        return res.status(200).json(deleted);
+      } catch (error) {
+        return res
+          .status(400)
+          .json({ message: "Resource not deleted", error: error });
+      }
     }
   }
   static async create(req, res) {
     const input = req.body;
-    console.log(input);
-    const createdL = await resource.create({ input });
 
-    if (!createdL)
-      return res.status(400).json({ message: "Resource not created" });
+    const inputV = validateResource(req.body);
+    if (inputV.error)
+      res.status(400).json({ message: JSON.parse(inputV.error.message) });
+    else if (inputV.success) {
+      //Check unique
+      const uqcheck = await ResourceModel.uqcheck({ addres: input.addres });
+      if (uqcheck) {
+        try {
+          const createdL = await ResourceModel.create({ input });
+          return res.status(201).json({ message: "Resource created" });
+        } catch {
+          return res.status(400).json({ message: "Resource not created" });
+        }
+      } else {
+        //Unespected error
+        return await res.status(409).json({ message: "Addres must be unique" });
+      }
+    }
 
-    return res.status(201).json({ message: "Resource created" });
   }
 
   static async update(req, res) {
     const { id } = req.params;
     const input = req.body;
-    
-    const inputV = validateResource(req.body);
 
-    if(inputV.error)
-      res.status(400).json( {message: JSON.parse(inputV.error.message)})
-    
-    try {
+    const inputV = validateResource(req.body);
+    //Schema Validation
+    if (inputV.error)
+      res.status(400).json({ message: JSON.parse(inputV.error.message) });
+    else if (inputV.success) {
+      //Check id
       const numbId = Number(id);
-      const idCheck = await resource.getByID({ id: numbId });
+      const idCheck = await ResourceModel.getByID({ id: numbId });
       if (!idCheck) {
-        return res.status(400).json({ message: "Id not foud" });
+        return res.status(404).json({ message: "Id not foud" });
       }
-    
-      const uqcheck = await resource.uqcheck({ addres: input.addres });
+      //Check unique
+      const uqcheck = await ResourceModel.uqcheck({ addres: input.addres });
       if (uqcheck) {
-        const updatedL = await resource.update({ id: numbId, input: input.data });
-        if (updatedL)
-          return await res.status(201).json({ message: "Resource updated" });
+        //Unexpected error
+        try {
+          const updatedL = await ResourceModel.update({
+            id: numbId,
+            input: input.data,
+          });
+          if (updatedL)
+            return await res.status(201).json({ message: "Resource updated" });
+        } catch {
+          return await res
+            .status(500)
+            .json({ message: "Resource not created " });
+        }
       } else {
-        return await res.status(400).json({ message: "Addres must be unique" });
+        return await res.status(409).json({ message: "Addres must be unique" });
       }
-    } catch {
-      res.status(500).json({ message: "Error interno del servidor." });
     }
   }
 }

@@ -5,6 +5,8 @@ interface Cast {
     name: string
     originalName: string
     character: string
-    deparment: Department
+    department: Department
     credits_id: number
 }
+
+type createCast = Omit<Cast, 'id'| 'credits_id'>

@@ -5,14 +5,16 @@ interface User {
   username: string
   lastname: string
   
-  passw: string
+  password: string
 
   role: string
 
   email: string
   phone: string
-  addres: string
 
-  mi_list: null | MiList[]
-  querys: null | Querys[]
+  MiList: null | MiList[]
+  querys: null | Query[]
 }
+
+type uniqueUser = Pick<User, 'nickname' | 'email' | 'phone' >
+type editUser = Omit<User, 'MiList' | 'querys'>

@@ -19,7 +19,10 @@ export const MetadataSchema = z.object({
     audio: z.string({
         invalid_type_error: 'Audio must be a String'
     }),
-    subt: z.string({
+    subtitle: z.string({
         invalid_type_error: 'Subtitle must be a String'
     })
-})
+}).partial()
+export function validateMetadata(input) {
+    return MetadataSchema.safeParse(input)
+}

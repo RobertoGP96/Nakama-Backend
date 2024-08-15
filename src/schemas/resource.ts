@@ -8,17 +8,17 @@ export const ResourceSchema = z.object({
     type: z.string({
         invalid_type_error: "Type must be a string",
     }) ,
-    e_found: z.number({
+    e_found_count: z.number({
         invalid_type_error: "E_Found must be a string",
         
     }),
-    e_pending: z.number({
+    e_pending_count: z.number({
         invalid_type_error: "E_pend must be a string",
     }),
-    e_ids: z.number({
+    e_founds: z.number({
         invalid_type_error: "E_ids must be a number array",
     }).array()
-})
+}).partial()
 
 
 export function validateResource(input) {

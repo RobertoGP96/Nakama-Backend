@@ -1,7 +1,7 @@
 import { Nprisma } from "../../prisma/prisma";
-import { resourceItem } from "../types/resources";
+import { editResourse, resourceItem } from "../types/resources";
 
-export default class Resource {
+export class ResourceModel {
   static async getAll() {
     return await Nprisma.resource.findMany();
   }
@@ -18,9 +18,9 @@ export default class Resource {
       data:{
         addres: input.addres,
         type: input.type,
-        e_founds_count: input.e_found,
-        e_pending_count: input.e_pending,
-        e_founds: input.e_ids,
+        e_founds_count: input.e_found_count,
+        e_pending_count: input.e_pending_count,
+        e_founds: input.e_founds,
     }});
   }
 
@@ -31,18 +31,13 @@ export default class Resource {
       },
     });
   }
-  static async update({ id, input }: { id: number; input: resourceItem }) {
+  static async update({ id, input }: { id: number; input: editResourse }) {
     return await Nprisma.resource.update({
       where: {
         id: id,
       },
       data: {
-        addres: input.addres,
-        e_founds_count: input.e_found,
-        e_pending_count: input.e_pending,
-        e_founds: input.e_ids,
-        type: input.type,
-
+        ...input
       },
     });
   }

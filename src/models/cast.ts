@@ -1,15 +1,15 @@
-import { Nprisma } from "../../prisma/prisma";
+import { Nprisma } from '../../prisma/prisma'
 
-export default class Cast {
+export class CastModel {
   static async getAll() {
     const getAll = await Nprisma.cast.findMany();
-    return getAll;
+    return getAll
   }
-  static async getByID({ id }) {
+  static async getByID ({ id }) {
     return await Nprisma.cast.findUnique({
-      where:{
+      where: {
         id: id
       }
-    });
+    })
   }
 }

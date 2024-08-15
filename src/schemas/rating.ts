@@ -25,4 +25,7 @@ export const RatingSchema = object({
     invalid_type_error: 'Votes must be a number.',
     required_error: 'Votes is required'
   }),
-})
+}).partial()
+export function validateRating(input) {
+  return RatingSchema.safeParse(input)
+}

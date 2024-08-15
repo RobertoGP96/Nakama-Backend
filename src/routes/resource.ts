@@ -1,12 +1,12 @@
 import { Router } from 'express'
 
-import { Resource } from '../controllers/resource'
+import { ResourceController } from '../controllers/resource'
 
 export const ResourceRouter = Router()
 
-ResourceRouter.get('/', Resource.getAll)
-ResourceRouter.get('/:id', Resource.getByID)
-ResourceRouter.post('/', Resource.create)
+ResourceRouter.get('/', ResourceController.getAll)
+ResourceRouter.get('/:id', ResourceController.getByID)
+ResourceRouter.post('/', ResourceController.create)
 
-ResourceRouter.delete('/:id', Resource.delete)
-ResourceRouter.put('/:id', Resource.update)
+ResourceRouter.delete('/:id', ResourceController.delete)
+ResourceRouter.put('/:id', ResourceController.update)

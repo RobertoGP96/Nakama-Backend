@@ -1,8 +1,8 @@
 import { Router } from 'express'
 
-import { Genre } from '../controllers/genre'
+import { GenreController } from '../controllers/genre'
 
 export const GenreRouter = Router()
 
-GenreRouter.get('/', Genre.getAll)
-GenreRouter.get('/:id', Genre.getByID)
+GenreRouter.get('/', GenreController.getAll)
+GenreRouter.get('/:id', GenreController.getByID)

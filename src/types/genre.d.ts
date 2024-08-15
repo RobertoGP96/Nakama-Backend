@@ -1,8 +1,8 @@
 import { genreName } from "@prisma/client"
 
-interface GenreC{
+interface Genre{
     id: number
-    element_id: number
+    elementId: number
     genres: genreName[]
 }
-
+type createGenre = Omit<Genre, 'id' | 'elementId'>

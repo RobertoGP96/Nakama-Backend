@@ -1,13 +1,17 @@
-import milist from "../models/milist";
-import { Nprisma }  from '../../prisma/prisma'
-export class MiList {
-  static async getAll(_req, _res) {
-    const getall = await milist.getAll();
-    return _res.status(201).json(getall);
+import { MiListModel } from "../models/milist";
+import { Nprisma } from "../../prisma/prisma";
+export class MiListController {
+  static async getAll(_req, res) {
+    const getall = await MiListModel.getAll();
+    if (!getall) {
+      return res.status(404).json({ message: "Is Empty" });
+    } else {
+      res.status(200).json(getall);
+    }
   }
   static async getByID(req, res) {
     const { id } = req.params;
-    const getbyId = await milist.getByID({ id });
+    const getbyId = await MiListModel.getByID({ id });
 
     if (!getbyId) return res.status(400).json({ message: "List id not found" });
 
@@ -15,28 +19,25 @@ export class MiList {
   }
   static async delete(req, res) {
     const { id } = req.params;
-
-    const checkId = milist.getByID({ id });
-
-    if (!checkId) return res.status(400).json({ message: "List Id not found" });
-
-    const deleted = await milist.delete({ id });
-
-    if (!deleted) return res.status(400).json({ message: "List not found" });
-
+    const checkId = MiListModel.getByID({ id });
+    if (!checkId) return res.status(404).json({ message: "List Id not found" });
+    const deleted = await MiListModel.delete({ id });
+    if (!deleted) return res.status(404).json({ message: "List not found" });
     return res.status(201).json({ message: "List deleted" });
   }
   static async create(req, res) {
     const { id: uId } = req.params;
     const input = req.body;
 
-    const checkId = Nprisma.user.findUnique({ where:{
-      id: uId
-    } });
-    
+    const checkId = Nprisma.user.findUnique({
+      where: {
+        id: uId,
+      },
+    });
+
     if (!checkId) return res.status(400).json({ message: "User Id not found" });
 
-    const createdL = await milist.create({ uId, input });
+    const createdL = await MiListModel.create({ uId, input });
 
     if (!createdL) return res.status(400).json({ message: "List not created" });
 
@@ -44,11 +45,26 @@ export class MiList {
   }
   static async update(req, res) {
     const { id } = req.params;
-    const input = req.body;
+    const input: MiList = req.body;
+    const inputV = (req.body);
 
-    const updatedL = await milist.update({ id, input });
+    if(inputV.error){
+      res.status(400).json({ message: JSON.parse(inputV.error.message) });
+    }
+    //Check User Id
+    const checkU = Nprisma.user.findUnique({
+      where:{
+        id: input.userId
+      }
+    })
 
-    if (!updatedL) return res.status(400).json({ message: "List not found" });
+    if(!checkU){
+      return res.status(404).json({ message: "User id not found" });
+    }
+
+    const updatedL = await MiListModel.update({ id, input });
+
+    if (!updatedL) return res.status(404).json({ message: "List not created" });
 
     return res.status(201).json({ message: "List updated" });
   }

@@ -1,6 +1,6 @@
 import { Nprisma } from "../../prisma/prisma"
 
-export default class Rating {
+export class RatingModel {
   static async getAll () {
     return await Nprisma.ratings.findMany()
   }

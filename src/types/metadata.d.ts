@@ -1,6 +1,6 @@
 interface Metadata{
     id: number
-    element_id: number | null
+    elementId: number | null
 
     storage: number
     duration: number
@@ -9,6 +9,8 @@ interface Metadata{
     resolution: string
     codec: string
     audio: string
-    subt: string
+    subtitle: string
     
 }
+
+type createMetadata = Omit<Metadata, 'id' | 'elementId'>

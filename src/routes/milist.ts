@@ -1,12 +1,12 @@
 import { Router } from 'express'
 
-import { MiList } from '../controllers/milist'
+import { MiListController } from '../controllers/milist'
 
 export const MiListRouter = Router()
 
-MiListRouter.get('/', MiList.getAll)
-MiListRouter.get('/:id', MiList.getByID)
-MiListRouter.post('/:id', MiList.create)
+MiListRouter.get('/', MiListController.getAll)
+MiListRouter.get('/:id', MiListController.getByID)
+MiListRouter.post('/', MiListController.create)
 
-MiListRouter.delete('/:id', MiList.delete)
-MiListRouter.put('/:id', MiList.update)
+MiListRouter.delete('/:id', MiListController.delete)
+MiListRouter.put('/:id', MiListController.update)
