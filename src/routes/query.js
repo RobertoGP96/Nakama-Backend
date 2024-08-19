@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.QueryRouter = void 0;
+var express_1 = require("express");
+var query_1 = require("../controllers/query");
+exports.QueryRouter = (0, express_1.Router)();
+exports.QueryRouter.get('/', query_1.QueryController.getAll);
+exports.QueryRouter.get('/:id', query_1.QueryController.getByID);
+exports.QueryRouter.post('/', query_1.QueryController.create);
+exports.QueryRouter.delete('/:id', query_1.QueryController.delete);
+exports.QueryRouter.put('/:id', query_1.QueryController.update);

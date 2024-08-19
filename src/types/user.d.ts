@@ -18,3 +18,4 @@ interface User {
 
 type uniqueUser = Pick<User, 'nickname' | 'email' | 'phone' >
 type editUser = Omit<User, 'MiList' | 'querys'>
+type newUser = Omit<User, 'MiList' | 'querys'| 'id' >

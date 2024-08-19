@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ApiKeyRouter = void 0;
+var express_1 = require("express");
+var api_key_1 = require("../controllers/api_key");
+exports.ApiKeyRouter = (0, express_1.Router)();
+exports.ApiKeyRouter.get('/', api_key_1.ApiKeyController.getAll);
+exports.ApiKeyRouter.get('/:id', api_key_1.ApiKeyController.getByID);
+exports.ApiKeyRouter.post('/', api_key_1.ApiKeyController.create);
+exports.ApiKeyRouter.put('/:id', api_key_1.ApiKeyController.update);

@@ -102,13 +102,13 @@ export class NakamaElementModel {
       data: {
         abstract: input.abstract,
         plot: input.plot,
-        category: input.Category,
+        category: input.category,
 
         title: input.title,
-        title_original: input.original_title,
+        title_original: input.title_original,
 
-        backdrop: input.backdrop_path,
-        poster: input.poster_path,
+        backdrop: input.backdrop,
+        poster: input.poster,
 
         year: input.year,
 
@@ -117,5 +117,12 @@ export class NakamaElementModel {
         country: input.country,
       },
     });
+  }
+  static async findMany({IDs}){
+    return await Nprisma.element.findMany({
+      where:{
+        id:IDs
+      }
+    })
   }
 }

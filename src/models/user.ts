@@ -12,7 +12,7 @@ export class UserModel {
       },
     });
   }
-  static async create({ input }: { input: User }) {
+  static async create({ input }: { input: newUser }) {
     return await Nprisma.user.create({
       data: {
         username: input.username,
@@ -53,5 +53,13 @@ export class UserModel {
       },
     });
     return await results? (false): (true) 
+  }
+
+  static async getByEmail({ email }: { email : string}) {
+    return await Nprisma.user.findUnique({
+      where: {
+        email: email,
+      },
+    });
   }
 }

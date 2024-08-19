@@ -8,6 +8,18 @@ CREATE TYPE "categoryName" AS ENUM ('Película', 'Serie', 'Novela', 'Documental'
 CREATE TYPE "genreName" AS ENUM ('Acción', 'Aventura', 'Animado', 'Comedia', 'Crimen', 'Documental', 'Drama', 'Fantasía', 'Histórico', 'Horror', 'Musical', 'Misterio', 'Romance', 'Sci-Fi', 'Thriller', 'Bélica', 'Oeste');
 
 -- CreateTable
+CREATE TABLE "Api_Key" (
+    "id" TEXT NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT false,
+    "name" TEXT NOT NULL,
+    "token" TEXT NOT NULL,
+    "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updateat" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Api_Key_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Cast" (
     "id" SERIAL NOT NULL,
     "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -167,6 +179,12 @@ CREATE TABLE "User" (
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Api_Key_name_key" ON "Api_Key"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Api_Key_token_key" ON "Api_Key"("token");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Credits_elementId_key" ON "Credits"("elementId");

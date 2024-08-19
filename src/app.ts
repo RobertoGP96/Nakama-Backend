@@ -11,17 +11,18 @@ import { GenreRouter } from './routes/genre'
 import { CreditsRouter } from './routes/credits'
 import { UserRouter } from './routes/user'
 import { CollectionRouter } from './routes/collection'
+import { AuthRouter } from './routes/auth'
+
+
+import { AuthMiddleware } from "./middlewares/auth"
+import { ApiKeyRouter } from './routes/api_key'
 
 const app = express()
-const port = 3000
 
 app.use(express.json());
-
 app.disable('x-powered-by')
 
-app.get('/', (_req, res) => {
-  res.send('Hello World!')
-})
+//app.use(AuthMiddleware.verifyAcces)
 
 app.use('/elements', NakamaElementRouter)
 app.use('/cast', CastRouter)
@@ -34,7 +35,9 @@ app.use('/resource', ResourceRouter)
 app.use('/genre', GenreRouter)
 app.use('/credits', CreditsRouter)
 app.use('/users', UserRouter)
+app.use('/auth', AuthRouter)
+app.use('/api_key', ApiKeyRouter)
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`)
+app.listen(process.env.SERVER_PORT, () => {
+  console.log(`Server is running on http://localhost:${process.env.SERVER_PORT}`)
 })

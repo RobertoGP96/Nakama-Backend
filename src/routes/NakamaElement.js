@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NakamaElementRouter = void 0;
+var express_1 = require("express");
+var NakamaElement_1 = require("../controllers/NakamaElement");
+exports.NakamaElementRouter = (0, express_1.Router)();
+exports.NakamaElementRouter.get('/', NakamaElement_1.NakamaElementController.getAll);
+exports.NakamaElementRouter.get('/:id', NakamaElement_1.NakamaElementController.getByID);
+exports.NakamaElementRouter.post('/', NakamaElement_1.NakamaElementController.create);
+exports.NakamaElementRouter.delete('/:id', NakamaElement_1.NakamaElementController.delete);
+exports.NakamaElementRouter.put('/:id', NakamaElement_1.NakamaElementController.update);

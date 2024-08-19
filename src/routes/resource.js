@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResourceRouter = void 0;
+var express_1 = require("express");
+var resource_1 = require("../controllers/resource");
+exports.ResourceRouter = (0, express_1.Router)();
+exports.ResourceRouter.get('/', resource_1.ResourceController.getAll);
+exports.ResourceRouter.get('/:id', resource_1.ResourceController.getByID);
+exports.ResourceRouter.post('/', resource_1.ResourceController.create);
+exports.ResourceRouter.delete('/:id', resource_1.ResourceController.delete);
+exports.ResourceRouter.put('/:id', resource_1.ResourceController.update);

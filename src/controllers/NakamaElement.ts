@@ -4,7 +4,8 @@ import { Request, Response } from "express";
 import { validateElement } from "../schemas/NakamaElement";
 import { createMany } from "../types/controllers";
 import { Filter } from "../types/filter";
-import { Element } from "@prisma/client";
+import { Element, externalids } from "@prisma/client";
+import { ExtermalIdsModel } from "../models/externalids";
 export class NakamaElementController {
   static async getAll(_req: Request, res: Response) {
     const getall = await NakamaElementModel.getAll();
@@ -92,5 +93,19 @@ export class NakamaElementController {
       ( filters.category.toLocaleString().includes(e.category) )
     })
     res.status(200).json(results)
+  }
+  
+  static async searchByExternal( req: Request, res: Response ){
+    const IDs: createExternalIds  = req.body
+    try{
+      const resultsIds = ((await ExtermalIdsModel.getAll()).filter((e: externalids)=>{
+        e.imdb_id==IDs.imdb_id || e.omdb_id==IDs.omdb_id || e.tmdb_id==IDs.tmdb_id 
+      }))
+      const results = (await NakamaElementModel.findMany({ IDs: resultsIds }))      
+      return res.status(200).json(results)
+    }catch{
+      return res.status(400).json({ message: "Error on filtering" })
+    }
+    
   }
 }
