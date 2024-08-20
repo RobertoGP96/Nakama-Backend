@@ -17,6 +17,6 @@ export class MetadataController {
     if (!getbyId)
       return res.staus(400).json({ message: "Metadata id not found" });
 
-    return res.status(201).json(getbyId);
+    return res.status(200).json(getbyId);
   }
 }

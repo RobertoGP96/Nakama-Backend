@@ -18,7 +18,7 @@ export class CollectionController {
     if (!getbyId)
       return res.staus(400).json({ message: "Collection id not found" });
 
-    return res.status(201).json(getbyId);
+    return res.status(200).json(getbyId);
   }
 
   static async delete(req, res) {

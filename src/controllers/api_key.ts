@@ -20,7 +20,7 @@ export class ApiKeyController {
     if (!getbyId)
       return res.staus(400).json({ message: "ApiKey id not found" });
 
-    return res.status(201).json(getbyId);
+    return res.status(200).json(getbyId);
   }
   static async create(req: Request, res: Response) {
     const newApiKey: newApiKey = req.body;

@@ -17,6 +17,6 @@ export class CreditsController {
     if (!getbyId)
       return res.staus(400).json({ message: "External Ids not found" });
 
-    return res.status(201).json(getbyId);
+    return res.status(200).json(getbyId);
   }
 }

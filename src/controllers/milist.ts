@@ -15,7 +15,7 @@ export class MiListController {
 
     if (!getbyId) return res.status(400).json({ message: "List id not found" });
 
-    return res.status(201).json(getbyId);
+    return res.status(200).json(getbyId);
   }
   static async delete(req, res) {
     const { id } = req.params;

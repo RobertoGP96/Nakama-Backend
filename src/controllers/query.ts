@@ -16,7 +16,7 @@ export class QueryController {
     if(!deleted)
       return res.status(400).json({ message: 'Query not deleted' })
 
-    return res.status(201).json({ message: 'Query Deleted' });
+    return res.status(200).json({ message: 'Query Deleted' });
   }
   static async create(req, res) {
     const { id:uId } = req.params
