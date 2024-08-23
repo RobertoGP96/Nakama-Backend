@@ -46,19 +46,19 @@ export class MiListController {
   static async update(req, res) {
     const { id } = req.params;
     const input: MiList = req.body;
-    const inputV = (req.body);
+    const inputV = req.body;
 
-    if(inputV.error){
+    if (inputV.error) {
       res.status(400).json({ message: JSON.parse(inputV.error.message) });
     }
     //Check User Id
     const checkU = Nprisma.user.findUnique({
-      where:{
-        id: input.userId
-      }
-    })
+      where: {
+        id: input.userId,
+      },
+    });
 
-    if(!checkU){
+    if (!checkU) {
       return res.status(404).json({ message: "User id not found" });
     }
 

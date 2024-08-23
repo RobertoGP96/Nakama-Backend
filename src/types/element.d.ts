@@ -55,3 +55,9 @@ interface createElement {
   plot: string;
   abstract: string;
 }
+
+type checkElement = {
+  id: null | number,
+  title: string,
+  status: boolean
+}

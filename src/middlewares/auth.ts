@@ -8,19 +8,28 @@ export class AuthMiddleware {
     try {
       const data = jwt.verify(token, process.env.SECRET_KEY as string);
     } catch (error) {}
-    
+
     next();
   }
-  
-  static async verifyApiKEyToken(req: Request, res: Response, next: NextFunction){
-    try {
-      const token = req.headers.authorization?.split(' ')[1];
-      const data = jwt.verify(token as string, process.env.SECRET_KEY as string);
-      if(!(data  && token)){
-        res.status(403)
-      }
-    } catch (error) {}
 
-    next()
+  static async verifyApiKEyToken(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const token = req.headers?.authorization?.split(" ")[1];
+      const data = jwt.verify(
+        token as string,
+        process.env.SECRET_KEY as string
+      );
+      if (!(data && token)) {
+        res.status(403);
+      }
+    } catch (error) {
+      res.status(401);
+    }
+
+    next();
   }
 }

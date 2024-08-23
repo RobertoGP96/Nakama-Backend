@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { NakamaElementRouter } from './routes/NakamaElement'
+import { ElementRouter } from './routes/element'
 import { CastRouter } from './routes/cast'
 import { MetadataRouter } from './routes/metadata'
 import { MiListRouter } from './routes/milist'
@@ -24,7 +24,7 @@ app.disable('x-powered-by')
 
 //app.use(AuthMiddleware.verifyAcces)
 
-app.use('/elements', NakamaElementRouter)
+app.use('/elements', ElementRouter)
 app.use('/cast', CastRouter)
 app.use('/collections', CollectionRouter)
 app.use('/metadata', MetadataRouter)

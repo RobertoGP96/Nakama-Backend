@@ -1,7 +1,7 @@
 import { Nprisma } from "../../prisma/prisma";
 import { createElement, editElement, Element } from "../types/element";
 
-export class NakamaElementModel {
+export class ElementModel {
   static async getAll() {
     return await Nprisma.element.findMany();
   }

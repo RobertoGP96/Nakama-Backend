@@ -57,7 +57,7 @@ export class CollectionController {
       return res.status(400).json({ message: "Something is wrong" });
     }
   }
-  static async update(req , res) {
+  static async update(req, res) {
     const { id } = req.params;
     const input: createCollection = req.body;
     const inputV = validateCollection(input);
