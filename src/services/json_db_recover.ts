@@ -1,1 +1,1 @@
-import data from '../db/old_data.json'
+import data from '../db/backup/old_data.json'
