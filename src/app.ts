@@ -16,6 +16,7 @@ import { AuthRouter } from './routes/auth'
 
 import { AuthMiddleware } from "./middlewares/auth"
 import { ApiKeyRouter } from './routes/api_key'
+import { SaveInfoRouter } from './routes/save_info'
 
 const app = express()
 
@@ -37,6 +38,8 @@ app.use('/credits', CreditsRouter)
 app.use('/users', UserRouter)
 app.use('/auth', AuthRouter)
 app.use('/api_key', ApiKeyRouter)
+
+app.use('/save_info', SaveInfoRouter)
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.SERVER_PORT}`)
