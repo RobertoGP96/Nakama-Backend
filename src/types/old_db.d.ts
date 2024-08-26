@@ -4,7 +4,7 @@ export type oldElement = {
     genres_es:      string;
     plot_es:        string;
     omdbDB:         OmdbDB;
-    updatedAt:      Date;
+    updatedAt:      string;
     popularity:     number;
 }
 
@@ -16,5 +16,5 @@ export type OmdbDB = {
     imdbRating:  string;
     imdbVotes:   string;
     Type:        string;
-    createdAt:   Date;
+    createdAt:   string;
 }

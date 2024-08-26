@@ -3,6 +3,7 @@ import {
   FindByImdbId,
   tmdbAlternativeTitles,
   tmdbCredits,
+  tmdbDetail,
   tmdbExternalsIds,
   tmdbImages,
   tmdbTraslations,
@@ -78,14 +79,14 @@ export class TmdbServise {
       .catch();
   };
   //Translations
-  static Translations = async ({
+  static Translations = ({
     tmdbId,
     type,
   }: {
     tmdbId: string;
     type: "movie" | "tv";
   }): Promise<tmdbTraslations> => {
-    return await fetch(
+    return fetch(
       this.base_url + `${type}/${tmdbId}/translations`,
       this.options
     )
@@ -100,7 +101,7 @@ export class TmdbServise {
     tmdbId: string;
     type: "movie" | "tv";
   }): Promise<tmdbCredits> => {
-    return await fetch(
+    return fetch(
       this.base_url + `${type}/${tmdbId}/credits`,
       this.options
     )
@@ -129,7 +130,7 @@ export class TmdbServise {
   }: {
     tmdbId: string;
     type: "movie" | "tv";
-  }): Promise<tmdbImages> => {
+  }): Promise<tmdbDetail> => {
     return await fetch(this.base_url + `${type}/${tmdbId}`, this.options)
       .then((res) => res.json())
       .catch();

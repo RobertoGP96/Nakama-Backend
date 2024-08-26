@@ -18,7 +18,7 @@ export class OMDBServise {
     },
   };
 
-  static getBySearch = async ({ search, year, type }:{ search: string ,year: undefined | string, type: 'movie' | 'series'}) => {
+  static getBySearch = async ({ search, year, type }:{ search: string ,year: undefined | string, type: string}) => {
     const yearurl = year? `&y=${year}` : ""
     return await fetch(
       `http://www.omdbapi.com/?apikey=${this.params.api_key}&s=${search}${yearurl}&type=${type}&plot=${this.params.plot}&r=${this.params.r}`,
@@ -27,7 +27,7 @@ export class OMDBServise {
       return await res.json();
     });
   };
-  static getByID = async ({ id, year, type  }:{ id: string, year: undefined | string, type: 'movie' | 'series' }) => {
+  static getByID = async ({ id, year, type  }:{ id: string, year: undefined | string, type: string }) => {
     const yearurl = year? `&y=${year}` : ""
     return await fetch(
       `http://www.omdbapi.com/?apikey=${this.params.api_key}&i=${id}${yearurl}&type=${type}&plot=${this.params.plot}&r=${this.params.r}`,
@@ -36,7 +36,7 @@ export class OMDBServise {
       return await res.json();
     });
   };
-  static getByTitle = async ({ title, year, type }:{ title: string, year: undefined | string, type: 'movie' | 'series'}) => {
+  static getByTitle = async ({ title, year, type }:{ title: string, year: undefined | string, type: string}) => {
     const yearurl = year? `&y=${year}` : ""
     return await fetch(
       `http://www.omdbapi.com/?apikey=${this.params.api_key}&t=${title}${yearurl}&type=${type}&plot=${this.params.plot}&r=${this.params.r}`,

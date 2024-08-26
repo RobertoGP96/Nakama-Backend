@@ -1,4 +1,4 @@
-export type omdbRElement = {
+export type omdbElement = {
     Title:      string;
     Year:       string;
     Rated:      string;

@@ -15,7 +15,7 @@ export type tmdbDetail = {
     poster_path:           string;
     production_companies:  ProductionCompany[];
     production_countries:  ProductionCountry[];
-    release_date:          Date;
+    release_date:          string;
     revenue:               number;
     runtime:               number;
     spoken_languages:      SpokenLanguage[];
@@ -104,6 +104,7 @@ export type alternTitle = {
 }
 
 export type tmdbCredits = {
+    tmdbCredits: any;
     id:   number;
     cast: Cast[];
     crew: Cast[];
