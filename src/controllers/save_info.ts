@@ -11,8 +11,8 @@ export class SaveInfoController {
       total: 0,
       length: Data.length,
     };
-    Data.forEach(async (element: oldElement) => {
-      try {
+    try {
+      Data.forEach(async (element: oldElement) => {
         const createData = await ElementModel.create({
           input: await SaveObj({ oldItem: element }),
         });
@@ -30,11 +30,11 @@ export class SaveInfoController {
           });
         }
         reportSave.total++;
-        return res.status(200).json(reportSave);
-      } catch (error) {
-        res.status(400).json({ message: "Something wet wrong" });
-        console.log("Something wet wrong" + error);
-      }
-    });
+      });
+      return res.status(200).json(reportSave);
+    } catch (error) {
+      res.status(400).json({ message: "Something wet wrong" });
+      console.log("Something wet wrong" + error);
+    }
   }
 }
