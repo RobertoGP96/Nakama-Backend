@@ -39,7 +39,7 @@ export class SaveInfoController {
       console.log("Something wet wrong" + error);
     }
     */
-    const scriptPath = '../utils/make_save.js';
+    const scriptPath = './src/dist/src/utils/make_save.js';
 
     exec(`node ${scriptPath}`, (error, stdout, stderr) => {
       if (error) {
