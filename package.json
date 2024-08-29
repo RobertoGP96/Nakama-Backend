@@ -28,6 +28,7 @@
     "@prisma/adapter-neon": "5.18.0",
     "@prisma/client": "5.17.0",
     "@types/fluent-ffmpeg": "^2.1.25",
+    "axios": "^1.7.5",
     "bcrypt": "5.1.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "16.4.5",
