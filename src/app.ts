@@ -18,6 +18,9 @@ import { AuthMiddleware } from "./middlewares/auth"
 import { ApiKeyRouter } from './routes/api_key'
 import { SaveInfoRouter } from './routes/save_info'
 
+import { TmdbRouter } from './routes/tmdb'
+import { OmdbRouter } from './routes/omdb'
+
 const app = express()
 
 app.use(express.json());
@@ -37,8 +40,15 @@ app.use('/genre', GenreRouter)
 app.use('/credits', CreditsRouter)
 app.use('/users', UserRouter)
 app.use('/auth', AuthRouter)
+
+//API KEY Access
 app.use('/api_key', ApiKeyRouter)
 
+//Services
+app.use('/tmdb', TmdbRouter)
+app.use('/omdb', OmdbRouter)
+
+//Backup
 app.use('/save_info', SaveInfoRouter)
 
 app.listen(process.env.SERVER_PORT, () => {

@@ -27,13 +27,14 @@ export class TmdbServise {
   }: {
     pageParam: number;
     search: string;
-    type: "movie" | "tv";
+    type: string;
   }) => {
     return await fetch(
       this.base_url +
         `search/${type}?query=${search}&include_adult=false&page=${pageParam}`,
       this.options
     ).then(async (res) => {
+      
       return await res.json();
     });
   };
@@ -57,7 +58,7 @@ export class TmdbServise {
     type,
   }: {
     tmdbId: string;
-    type: "movie" | "tv";
+    type: string;
   }): Promise<tmdbExternalsIds> => {
     return await fetch(
       this.base_url + `${type}/${tmdbId}/external_ids`,
@@ -72,7 +73,7 @@ export class TmdbServise {
     type,
   }: {
     tmdbId: string;
-    type: "movie" | "tv";
+    type: string;
   }): Promise<tmdbImages> => {
     return await fetch(this.base_url + `${type}/${tmdbId}/images`, this.options)
       .then((res) => res.json())
@@ -99,7 +100,7 @@ export class TmdbServise {
     type,
   }: {
     tmdbId: string;
-    type: "movie" | "tv";
+    type: string;
   }): Promise<tmdbCredits> => {
     return fetch(
       this.base_url + `${type}/${tmdbId}/credits`,
@@ -114,7 +115,7 @@ export class TmdbServise {
     type,
   }: {
     tmdbId: string;
-    type: "movie" | "tv";
+    type: string;
   }): Promise<tmdbAlternativeTitles> => {
     return await fetch(
       this.base_url + `${type}/${tmdbId}/alternative_titles`,
@@ -129,13 +130,27 @@ export class TmdbServise {
     type,
   }: {
     tmdbId: string;
-    type: "movie" | "tv";
+    type: string;
   }): Promise<tmdbDetail> => {
     return await fetch(this.base_url + `${type}/${tmdbId}`, this.options)
       .then((res) => res.json())
       .catch();
   };
-
+  //BigQuery
+  static BigQueryES = async ({
+    tmdbId,
+    type,
+    lang
+  }: {
+    tmdbId: string;
+    type: string;
+    lang: string
+  }): Promise<tmdbDetail> => {
+    return await fetch(this.base_url + `${type}/${tmdbId}?append_to_response=translations%2Cexternalsids%2Cimages%2Ccredits&language=${lang}`, this.options)
+      .then((res) => res.json())
+      .catch();
+  };
+  
   //LISTs
   static Upcomming = async () => {
     return await fetch(this.base_url + "movie/upcoming", this.options).then(
