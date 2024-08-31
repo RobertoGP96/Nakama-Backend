@@ -1,7 +1,6 @@
 import Data from "../db/backup/old_data.json";
 import { ElementModel } from "../models/element";
 import { oldElement } from "../types/old_db";
-import { SaveObj } from "../utils/save_backup_info";
 
 import { exec } from 'child_process';
 

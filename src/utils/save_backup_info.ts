@@ -1,19 +1,20 @@
+/*
 import { oldElement } from "../types/old_db";
 import { TmdbServise } from "../services/tmdb";
 import { OMDBServise } from "../services/omdb";
 
 import { CollectInfo } from "./colect_info";
 import { categoryName } from "@prisma/client";
-
 export async function SaveObj({ oldItem }: { oldItem: oldElement }) {
   const tmdbresult = await TmdbServise.FindByImdbId({
     imdbId: oldItem.omdbDB.imdbID,
   });
 
-  const tmdbItem = await TmdbServise.Details({
+  const tmdbItem = await TmdbServise.BigQueryES({
     tmdbId: oldItem.omdbDB.imdbID,
-    type: oldItem.omdbDB.Type == "movie" ? "movie" : "tv",
+    type: oldItem.omdbDB.Type,
   });
+
   const omdbItem = await OMDBServise.getByID({
     id: oldItem.omdbDB.imdbID,
     year: oldItem.omdbDB.Year,
@@ -66,3 +67,4 @@ export async function SaveObj({ oldItem }: { oldItem: oldElement }) {
     },
   };
 }
+*/

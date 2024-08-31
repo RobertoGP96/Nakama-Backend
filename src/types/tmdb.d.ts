@@ -224,8 +224,7 @@ export type TvResult = {
     vote_count:        number;
     origin_country:    string[];
 }
-/*
-export type Welcome = {
+export type BigQuery = {
     adult:                 boolean;
     backdrop_path:         string;
     belongs_to_collection: BelongsToCollection;
@@ -242,7 +241,7 @@ export type Welcome = {
     poster_path:           string;
     production_companies:  ProductionCompany[];
     production_countries:  ProductionCountry[];
-    release_date:          Date;
+    release_date:          string;
     revenue:               number;
     runtime:               number;
     spoken_languages:      SpokenLanguage[];
@@ -255,19 +254,22 @@ export type Welcome = {
     translations:          Translations;
     external_ids:          ExternalIDS;
     credits:               Credits;
-}
+    }
+    
 
-export type BelongsToCollection = {
-    id:            number;
+    export type Credits = {
+        cast: Cast[];
+        crew: Cast[];
+    }
+    /*
+    export type BelongsToCollection = {
+        id:            number;
     name:          string;
     poster_path:   string;
     backdrop_path: string;
 }
 
-export type Credits = {
-    cast: Cast[];
-    crew: Cast[];
-}
+
 
 export type Cast = {
     adult:                boolean;

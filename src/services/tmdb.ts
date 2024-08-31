@@ -1,5 +1,6 @@
 import { error } from "console";
 import {
+  BigQuery,
   FindByImdbId,
   tmdbAlternativeTitles,
   tmdbCredits,
@@ -145,7 +146,7 @@ export class TmdbServise {
     tmdbId: string;
     type: string;
     lang: string
-  }): Promise<tmdbDetail> => {
+  }): Promise<BigQuery> => {
     return await fetch(this.base_url + `${type}/${tmdbId}?append_to_response=translations%2Cexternalsids%2Cimages%2Ccredits&language=${lang}`, this.options)
       .then((res) => res.json())
       .catch();

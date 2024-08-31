@@ -1,4 +1,4 @@
-import Data from "../db/backup/old_data.json";
+/*import Data from "../db/backup/old_data.json";
 import { oldElement } from "../types/old_db";
 import { ElementModel } from "../models/element";
 import { SaveObj } from "./save_backup_info";
@@ -40,3 +40,4 @@ main().catch((e) => {
   console.error(e);
   process.exit(1);
 });
+*/

@@ -1,5 +1,7 @@
 //const API_KEY_OMDB = "4303a522";
 
+import { omdbElement } from "../types/omdb";
+
 export class OMDBServise {
   static params = {
     method: "GET",
@@ -21,28 +23,22 @@ export class OMDBServise {
   static getBySearch = async ({ search, year, type }:{ search: string ,year: undefined | string, type: string}) => {
     const yearurl = year? `&y=${year}` : ""
     return await fetch(
-      `http://www.omdbapi.com/?apikey=${this.params.api_key}&s=${search}${yearurl}&type=${type}&plot=${this.params.plot}&r=${this.params.r}`,
+      `http://www.omdbapi.com/?apikey=${this.params.api_key}&s=${search}${yearurl}&type=${type}&plot=full&r=json`,
       this.options
-    ).then(async (res) => {
-      return await res.json();
-    });
+    ).then(async (res) => res.json());
   };
-  static getByID = async ({ id, year, type  }:{ id: string, year: undefined | string, type: string }) => {
+  static getByID = async ({ id, year, type  }:{ id: string, year: undefined | string, type: string }): Promise<omdbElement> => {
     const yearurl = year? `&y=${year}` : ""
     return await fetch(
-      `http://www.omdbapi.com/?apikey=${this.params.api_key}&i=${id}${yearurl}&type=${type}&plot=${this.params.plot}&r=${this.params.r}`,
+      `http://www.omdbapi.com/?apikey=${this.params.api_key}&i=${id}${yearurl}&type=${type}&plot=full&r=json`,
       this.options
-    ).then(async (res) => {
-      return await res.json();
-    });
+    ).then(async (res) => res.json());
   };
-  static getByTitle = async ({ title, year, type }:{ title: string, year: undefined | string, type: string}) => {
+  static getByTitle = async ({ title, year, type }:{ title: string, year: undefined | string, type: string}): Promise<omdbElement> => {
     const yearurl = year? `&y=${year}` : ""
     return await fetch(
-      `http://www.omdbapi.com/?apikey=${this.params.api_key}&t=${title}${yearurl}&type=${type}&plot=${this.params.plot}&r=${this.params.r}`,
+      `http://www.omdbapi.com/?apikey=${this.params.api_key}&t=${title}${yearurl}&type=${type}&plot=full&r=json`,
       this.options
-    ).then(async (res) => {
-      return await res.json();
-    });
+    ).then(async (res) => res.json());
   };
 }

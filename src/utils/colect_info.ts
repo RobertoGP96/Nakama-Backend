@@ -1,29 +1,28 @@
 import { createElement, Element } from "../types/element";
 import { omdbElement } from "../types/omdb";
-import { Cast, tmdbCredits, tmdbDetail, tmdbTraslations } from "../types/tmdb";
+import {
+  BigQuery,
+  Cast,
+} from "../types/tmdb";
 
-import { TmdbServise } from "../services/tmdb";
 import { createCredits } from "../types/credits";
 import { createCast } from "../types/cast";
-import { get } from "http";
 import { createGenre } from "../types/genre";
 import { genreName } from "@prisma/client";
+import { oldElement } from "../types/old_db";
+import { TmdbServise } from "../services/tmdb";
+import { OMDBServise } from "../services/omdb";
 
 export class CollectInfo {
   static takeInfo = ({
     tmdbItem,
     omdbItem,
   }: {
-    tmdbItem: tmdbDetail;
+    tmdbItem: BigQuery;
     omdbItem: omdbElement;
   }): createElement => {
-    const es_info = this.getEStranslation({
-      tmdbId: String(tmdbItem.id),
-      type: omdbItem.Type == "Movie" ? "movie" : "tv",
-    });
-
     const newElement: createElement = {
-      title: es_info.title,
+      title: tmdbItem.title,
       abstract: "",
       backdrop_path: tmdbItem.backdrop_path,
       poster_path: tmdbItem.poster_path,
@@ -31,11 +30,11 @@ export class CollectInfo {
       Category: omdbItem.Type == "movie" ? "Pelicula" : "Serie",
       country: omdbItem.Country,
       original_title: tmdbItem.original_title,
-      plot: es_info.plot,
+      plot: tmdbItem.overview,
       year: Number(omdbItem.Year),
 
       externalids: {
-        imdb_id: omdbItem.imdbID,
+        imdb_id: tmdbItem.imdb_id,
         tmdb_id: String(tmdbItem.id),
         omdb_id: "",
       },
@@ -51,8 +50,7 @@ export class CollectInfo {
       },
 
       credits: this.collectCredits({
-        tmdbId: String(tmdbItem.id),
-        type: omdbItem.Type == "Movie" ? "movie" : "tv",
+        tmdbItem,
       }),
 
       genres: this.collectGenres({ tmdbItem }),
@@ -69,28 +67,13 @@ export class CollectInfo {
     return newElement;
   };
   static collectCredits = ({
-    tmdbId,
-    type,
+    tmdbItem,
   }: {
-    tmdbId: string;
-    type: "movie" | "tv";
+    tmdbItem: BigQuery;
   }): createCredits => {
-    let tmdbCredits: tmdbCredits = 
-    {cast: [],
-      crew:[],
-      id: 0,
-      tmdbCredits: ""
-    }
-    TmdbServise.Credits({
-      tmdbId,
-      type: type,
-    }).then(cred =>{
-      tmdbCredits = cred
-    }
-    )
     const casting: createCast[] = [];
     //
-    tmdbCredits.cast.map((tmp: Cast) => {
+    tmdbItem.credits.cast.map((tmp: Cast) => {
       casting.push({
         name: tmp.name,
         originalName: tmp.original_name,
@@ -99,7 +82,7 @@ export class CollectInfo {
       });
     });
     //
-    const getDirector = tmdbCredits.crew.filter((tmp: Cast) => {
+    const getDirector = tmdbItem.credits.crew.filter((tmp: Cast) => {
       return (tmp.department as string) == "directing";
     });
     casting.push({
@@ -116,7 +99,7 @@ export class CollectInfo {
   static collectGenres = ({
     tmdbItem,
   }: {
-    tmdbItem: tmdbDetail;
+    tmdbItem: BigQuery;
   }): createGenre => {
     const newGenres: genreName[] = [];
 
@@ -169,30 +152,18 @@ export class CollectInfo {
         return "Accion";
     }
   };
-  static getEStranslation({
-    tmdbId,
-    type,
-  }: {
-    tmdbId: string;
-    type: "movie" | "tv";
-  }) {
-    let translation: tmdbTraslations ={
-      id:0,
-      translations:[]
-    } 
-    TmdbServise.Translations({
-      tmdbId,
-      type,
-    }).then(res => {
-      translation = res
-    });
-
-    const newInfo = translation.translations.filter((element) => {
-      element.iso_3166_1 == "ES";
-    })[0].data;
-    return {
-      title: newInfo.title,
-      plot: newInfo.overview,
-    };
+  
+  static collectObject= async ({oldItem}:{oldItem: oldElement}):  Promise<collectObject> =>{
+    const old_find_id = await TmdbServise.FindByImdbId({imdbId: oldItem.omdbDB.imdbID} )
+    const result_object ={
+      tmdbItem: await TmdbServise.BigQueryES({tmdbId:oldItem.omdbDB.Type=="movie"?String(old_find_id.movie_results[0].id):String(old_find_id.tv_results[0].id), lang:"es-ES", type:oldItem.omdbDB.Type=="movie"?"movie":"tv"} ),
+      omdbItem: await OMDBServise.getByID({ id:oldItem.omdbDB.imdbID, type:oldItem.omdbDB.Type, year: undefined })
+    }
+    return result_object;
   }
+}
+
+type collectObject = {
+  tmdbItem: BigQuery,
+  omdbItem: omdbElement
 }

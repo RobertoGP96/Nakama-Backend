@@ -4,4 +4,4 @@ import { SaveInfoController } from '../controllers/save_info'
 
 export const SaveInfoRouter = Router()
 
-SaveInfoRouter.post('/', SaveInfoController.saveJsonInfo)
+SaveInfoRouter.post('/', )
