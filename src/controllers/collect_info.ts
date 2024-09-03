@@ -105,9 +105,6 @@ export class CollectInfoController {
           results: tmp
         });
       });
-
-      /*if (!dirs) res.status(400).send({ message: "Wrong Dir_Path" });
-      else res.send({ result: dirs });*/
     }
   }
 }
