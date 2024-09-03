@@ -24,12 +24,11 @@ export class AuthMiddleware {
         process.env.SECRET_KEY as string
       );
       if (!(data && token)) {
-        res.status(403);
+        res.status(403).json({ message: "Bad query" });
       }
+      if (data) next();
     } catch (error) {
-      res.status(401);
+      res.status(401).json({ Message: "Api Key Not Provide" });
     }
-
-    next();
   }
 }

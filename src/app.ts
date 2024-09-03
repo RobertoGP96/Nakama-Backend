@@ -16,17 +16,17 @@ import { AuthRouter } from './routes/auth'
 
 import { AuthMiddleware } from "./middlewares/auth"
 import { ApiKeyRouter } from './routes/api_key'
-import { SaveInfoRouter } from './routes/save_info'
 
 import { TmdbRouter } from './routes/tmdb'
 import { OmdbRouter } from './routes/omdb'
+import { CollectInfoRouter } from './routes/collect_info'
 
 const app = express()
 
 app.use(express.json());
 app.disable('x-powered-by')
 
-//app.use(AuthMiddleware.verifyAcces)
+app.use(AuthMiddleware.verifyApiKEyToken)
 
 app.use('/elements', ElementRouter)
 app.use('/cast', CastRouter)
@@ -48,8 +48,8 @@ app.use('/api_key', ApiKeyRouter)
 app.use('/tmdb', TmdbRouter)
 app.use('/omdb', OmdbRouter)
 
-//Backup
-app.use('/save_info', SaveInfoRouter)
+//Collect info from json backup file
+app.use('/collect_info', CollectInfoRouter)
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.SERVER_PORT}`)
