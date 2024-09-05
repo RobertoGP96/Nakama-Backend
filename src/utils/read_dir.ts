@@ -1,14 +1,18 @@
 import fs from "fs";
 import path from "path";
+import { extractMetadata } from "./copilot";
+import { extractInfoSource } from "./extract_info_source";
+import { SourceMeta } from "../types/source";
 
 type elementDir = {
   title: string;
   year: string;
   path: string;
-  constent: string[];
+  content: string[];
+  metadata: createMetadata;
 };
 
-export function ReadDir(direccion: string): elementDir[] | undefined {
+export async function ReadDir(direccion: string): Promise<elementDir[] | undefined> {
   // Verifica si la dirección es un directorio
 
   if (!fs.existsSync(direccion)) {
@@ -19,28 +23,54 @@ export function ReadDir(direccion: string): elementDir[] | undefined {
       const directorios: elementDir[] = [];
       const contenido = fs.readdirSync(direccion);
       // Filtra solo los directorios de primer nivel
-      contenido.map((nombre) => {
+      contenido.map(async (nombre) => {
         const rutaCompleta = path.join(direccion, nombre);
         if (fs.lstatSync(rutaCompleta).isDirectory()) {
-          const newElement: elementDir = {
-            title: "",
-            year: "",
-            path: "",
-            constent: [],
-          };
-          newElement.path = direccion + "\\" + nombre;
-
+          const path = direccion + "\\" + nombre;
           const tmp = nombre.split("] ");
-
-          newElement.title = tmp[1];
-          newElement.year = tmp[0].replace("[", "");
+          const title = tmp[1];
+          const year = tmp[0].replace("[", "");
           //Analizando contenido del directorio
           const IN = fs.readdirSync(direccion + "\\" + nombre);
+          const content: string[] = [];
           IN.map((file) => {
-            newElement.constent.push(file);
+            content.push(file);
           });
 
-          directorios.push(newElement);
+          //Metadata
+          let metadata: createMetadata= {
+            audio: "",
+            codec: "",
+            duration: 0,
+            fps: 0,
+            resolution: "",
+            storage:0,
+            subtitle:"",
+          }
+          if(IN.length>0 || !(IN.length==1 && IN[0].includes(".srt")) ){
+
+            const videoUrl = content.filter((tmp) => {
+              const cut = tmp.split(".");
+              return cut[cut.length - 1] != "srt";
+            });
+            const videoSource = await extractMetadata(path + "\\" + videoUrl).then((tmp)=>{
+              
+              metadata = extractInfoSource(
+                tmp as SourceMeta
+              );
+              console.log(">> "+metadata.fps)
+              const newElement: elementDir = {
+                title: title,
+                year: year,
+                path: path,
+                content: content,
+                metadata: metadata,
+              };
+              directorios.push(newElement);
+            })
+
+          }
+          
         }
       });
       return directorios;

@@ -1,48 +1,17 @@
-{
-    "H.264": {
-
-        "CodecID": "avc1, h264"
-    },
-    "H.265": {
-        "CodecID": "hevc, hvc1"
-    },
-    "MPEG-2": {
-        "CodecID": "mpeg2, mp2v"
-    },
-    "MPEG-4": {
-        "CodecID": "mp4v, mp4a"
-    },
-    "VP8": {
-        "CodecID": "vp80"
-    },
-    "VP9": {
-        "CodecID": "vp90"
-    },
-    "AV1": {
-        "CodecID": "av01"
-    },
-    "DivX": {
-        "CodecID": "divx"
-    },
-    "Xvid": {
-        "CodecID": "xvid"
-    },
-    "MJPEG": {
-        "CodecID": "mjpe, mjpeg"
-    },
-    "ProRes": {
-        "CodecID": "apch, apcs, apcn, apco, apch"
-    },
-    "DNxHD": {
-        "CodecID": "dnxh"
-    },
-    "CineForm": {
-        "CodecID": "cfhd"
-    },
-    "Theora": {
-        "CodecID": "theo"
-    },
-    "RealVideo": {
-        "CodecID": "rv30, rv40"
-    }
-}
+[
+  { "format": "H.264", "CodecID": "avc1, h264" },
+  { "format": "H.265", "CodecID": "hevc, hvc1" },
+  { "format": "MPEG-2", "CodecID": "mpeg2, mp2v" },
+  { "format": "MPEG-4", "CodecID": "mp4v, mp4a" },
+  { "format": "VP8", "CodecID": "vp80" },
+  { "format": "VP9", "CodecID": "vp90" },
+  { "format": "AV1", "CodecID": "av01" },
+  { "format": "DivX", "CodecID": "divx" },
+  { "format": "Xvid", "CodecID": "xvid" },
+  { "format": "MJPEG", "CodecID": "mjpe, mjpeg" },
+  { "format": "ProRes", "CodecID": "apch, apcs, apcn, apco, apch" },
+  { "format": "DNxHD", "CodecID": "dnxh" },
+  { "format": "CineForm", "CodecID": "cfhd" },
+  { "format": "Theora", "CodecID": "theo" },
+  { "format": "RealVideo", "CodecID": "rv30, rv40" }
+]
