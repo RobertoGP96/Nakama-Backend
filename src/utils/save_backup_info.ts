@@ -1,7 +1,6 @@
 import { oldElement } from "../types/old_db";
 import { TmdbServise } from "../services/tmdb";
 import { OMDBServise } from "../services/omdb";
-import { createElement } from "../types/element";
 import { CollectInfo } from "./colect_info";
 
 export async function BackupOldDB({ oldItem }: { oldItem: oldElement }) {
