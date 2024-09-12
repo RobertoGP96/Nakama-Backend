@@ -20,6 +20,7 @@ import { ApiKeyRouter } from './routes/api_key'
 import { TmdbRouter } from './routes/tmdb'
 import { OmdbRouter } from './routes/omdb'
 import { CollectInfoRouter } from './routes/collect_info'
+import { PreSaveRouter } from './routes/pre_save'
 
 const app = express()
 
@@ -27,7 +28,7 @@ app.use(express.json());
 app.disable('x-powered-by')
 
 app.use(AuthMiddleware.verifyApiKEyToken)
-
+//Data
 app.use('/elements', ElementRouter)
 app.use('/cast', CastRouter)
 app.use('/collections', CollectionRouter)
@@ -38,7 +39,10 @@ app.use('/rating', RatingRouter)
 app.use('/resource', ResourceRouter)
 app.use('/genre', GenreRouter)
 app.use('/credits', CreditsRouter)
+app.use('/pre_save', PreSaveRouter)
+
 app.use('/users', UserRouter)
+
 app.use('/auth', AuthRouter)
 
 //API KEY Access

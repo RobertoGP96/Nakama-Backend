@@ -1,5 +1,4 @@
 import { PreSaveModel } from "../models/pre_save";
-import { ResourceModel } from "../models/resource";
 import { validatePreSave } from "../schemas/pre_save";
 
 export class PreSaveController {
@@ -66,7 +65,7 @@ export class PreSaveController {
       }
     }
   }
-  
+
   static async delete(req, res) {
     
     const { id } = req.params;

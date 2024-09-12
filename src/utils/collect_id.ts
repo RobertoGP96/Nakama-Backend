@@ -11,6 +11,9 @@ export function extractMetadata(itemCollect: elementDir, type: string) {
     if (results.total_results == 0) {
       return "";
     }
-    return results.results[0].id;
+    if(results.results.length==0)
+      return undefined
+    else
+    return results.results[0].id ;
   });
 }
