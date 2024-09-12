@@ -1,4 +1,4 @@
-var jsmediatags = require("jsmediatags");
+/*import jsmediatags from "jsmediatags"
 
 jsmediatags.read("./music-file.mp3", {
   onSuccess: function(tag) {
@@ -7,4 +7,4 @@ jsmediatags.read("./music-file.mp3", {
   onError: function(error) {
     console.log(':(', error.type, error.info);
   }
-});
+});*/

@@ -24,4 +24,6 @@ enum genreName {
   Thriller
   Belica     @map("Bélica")
   Oeste
+  Familia
+  TV
 }

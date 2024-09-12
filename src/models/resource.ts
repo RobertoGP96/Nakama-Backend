@@ -1,5 +1,5 @@
 import { Nprisma } from "../../prisma/prisma";
-import { editResourse, resourceItem } from "../types/resources";
+import { createResourse, editResourse, resourceItem } from "../types/resources";
 
 export class ResourceModel {
   static async getAll() {
@@ -13,14 +13,11 @@ export class ResourceModel {
       },
     });
   }
-  static async create({ input }:{input: resourceItem}) {
+  static async create({ input }:{input: createResourse}) {
     return await Nprisma.resource.create({
       data:{
         addres: input.addres,
-        type: input.type,
-        e_founds_count: input.e_found_count,
-        e_pending_count: input.e_pending_count,
-        e_founds: input.e_founds,
+        type: input.type
     }});
   }
 

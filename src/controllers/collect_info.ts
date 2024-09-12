@@ -5,6 +5,9 @@ import db from "../db/backup/old_data.json";
 import { exec } from "child_process";
 import { ReadDir } from "../utils/read_dir";
 import { extractMetadata } from "../utils/copilot";
+import { LimitActionOldDB } from "../utils/progresive_trans";
+import { BackupOldDBAltern } from "../utils/save_backup_info";
+import { ElementModel } from "../models/element";
 
 export class CollectInfoController {
   static async getInfo(_req: Request, res: Response) {
@@ -102,9 +105,22 @@ export class CollectInfoController {
     else {
       extractMetadata(url).then((tmp) => {
         res.send({
-          results: tmp
+          results: tmp,
         });
       });
     }
+  }
+  static async readOldDB(_req: Request, res: Response) {
+    LimitActionOldDB({ batchSize: 30, data: db, delay: 15000 });
+    res.send({ status: "start process" });
+  }
+  static async read_test(_req: Request, res: Response) {
+    BackupOldDBAltern({oldItem: db[0]}).then((tmp) => {
+      ElementModel.create({input: tmp}).then(
+        (newE)=>{
+          res.send(newE);
+        }
+      )
+    });
   }
 }

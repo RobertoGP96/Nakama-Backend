@@ -1,41 +1,38 @@
-import axios from 'axios';
-import { createElement } from '../types/element';
-import { oldElement } from '../types/old_db';
+import { Nprisma } from "../../prisma/prisma";
+import { createElement } from "../types/element";
+import { oldElement } from "../types/old_db";
+import { BackupOldDB } from "./save_backup_info";
 
-async function fetchMoviesFromTMDB(data: oldElement[]) {
-    const apiKey = 'YOUR_TMDB_API_KEY';
-    const batchSize = 35;
-    const delay = 12000; // 12 seconds
+export async function LimitActionOldDB({
+  batchSize,
+  delay,
+  data,
+}: {
+  batchSize: number;
+  delay: number;
+  data: oldElement[];
+}) {
 
-    const movies: createElement[] = []; // Array to store the fetched movies
-
-    for (let i = 0; i < data.length; i += batchSize) {
-        const batch = data.slice(i, i + batchSize);
-
-        try {
-            const response = await axios.get(`https://api.themoviedb.org/3/movies/${}`, {
-                params: {
-                    api_key: apiKey,
-                    ids: batch.map((item) => item.omdbDB.imdbID).join(','),
-                },
-            });
-
-            // Process the response data here
-            const fetchedMovies = response.data.results;
-            movies.push(...fetchedMovies.map((movie: any) => createElement(movie)));
-
-        } catch (error) {
-            console.error('Error fetching movies from TMDB:', error);
-        }
-
-        await new Promise((resolve) => setTimeout(resolve, delay));
+  const contentProcess: any[] = [];
+  let flag = 0;
+  data.map(async (element) => {
+    try {
+        await BackupOldDB({oldItem: element}) 
+    } catch (error) {
+      console.error("Error fetching:", error);
     }
 
-    return movies;
+
+    if (jumpFlag(flag, batchSize))
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    
+    flag++;
+  });
+
+  return contentProcess;
 }
 
-function createElement(movie: any) {
-    // Create and return the element based on the movie data
-    // Implement your logic here
-    return movie;
+function jumpFlag(flag: number, jump: number): boolean{
+    const rel =(flag+1)/jump;
+    return rel==Number(rel.toFixed(0))
 }

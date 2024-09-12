@@ -5,7 +5,7 @@ CREATE TYPE "Department" AS ENUM ('ACTOR', 'DIRECTOR', 'ESCRITOR', 'PRODUCTOR');
 CREATE TYPE "categoryName" AS ENUM ('Película', 'Serie', 'Novela', 'Documental', 'Dorama', 'Anime', 'Reality', 'Show');
 
 -- CreateEnum
-CREATE TYPE "genreName" AS ENUM ('Acción', 'Aventura', 'Animado', 'Comedia', 'Crimen', 'Documental', 'Drama', 'Fantasía', 'Histórico', 'Horror', 'Musical', 'Misterio', 'Romance', 'Sci-Fi', 'Thriller', 'Bélica', 'Oeste');
+CREATE TYPE "genreName" AS ENUM ('Acción', 'Aventura', 'Animado', 'Comedia', 'Crimen', 'Documental', 'Drama', 'Fantasía', 'Histórico', 'Horror', 'Musical', 'Misterio', 'Romance', 'Sci-Fi', 'Thriller', 'Bélica', 'Oeste', 'Familia', 'TV');
 
 -- CreateTable
 CREATE TABLE "Api_Key" (
@@ -56,16 +56,22 @@ CREATE TABLE "Credits" (
 );
 
 -- CreateTable
-CREATE TABLE "externalids" (
+CREATE TABLE "Element" (
     "id" SERIAL NOT NULL,
+    "year" INTEGER NOT NULL,
+    "poster" TEXT NOT NULL,
+    "backdrop" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "title_original" TEXT NOT NULL,
+    "country" TEXT NOT NULL,
+    "popularity" DOUBLE PRECISION NOT NULL,
+    "category" "categoryName" NOT NULL,
+    "plot" TEXT NOT NULL,
+    "abstract" TEXT NOT NULL,
     "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updateat" TIMESTAMP(3) NOT NULL,
-    "elementId" INTEGER NOT NULL,
-    "imdb_id" TEXT NOT NULL,
-    "tmdb_id" TEXT NOT NULL,
-    "omdb_id" TEXT NOT NULL,
 
-    CONSTRAINT "externalids_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Element_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -103,25 +109,6 @@ CREATE TABLE "MiList" (
     "elements" INTEGER[],
 
     CONSTRAINT "MiList_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Element" (
-    "id" SERIAL NOT NULL,
-    "year" INTEGER NOT NULL,
-    "poster" TEXT NOT NULL,
-    "backdrop" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
-    "title_original" TEXT NOT NULL,
-    "country" TEXT NOT NULL,
-    "popularity" DOUBLE PRECISION NOT NULL,
-    "category" "categoryName" NOT NULL,
-    "plot" TEXT NOT NULL,
-    "abstract" TEXT NOT NULL,
-    "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updateat" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "Element_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -180,6 +167,19 @@ CREATE TABLE "User" (
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "externalids" (
+    "id" SERIAL NOT NULL,
+    "createat" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updateat" TIMESTAMP(3) NOT NULL,
+    "elementId" INTEGER NOT NULL,
+    "imdb_id" TEXT NOT NULL,
+    "tmdb_id" TEXT NOT NULL,
+    "omdb_id" TEXT NOT NULL,
+
+    CONSTRAINT "externalids_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Api_Key_name_key" ON "Api_Key"("name");
 
@@ -190,19 +190,16 @@ CREATE UNIQUE INDEX "Api_Key_token_key" ON "Api_Key"("token");
 CREATE UNIQUE INDEX "Credits_elementId_key" ON "Credits"("elementId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "externalids_elementId_key" ON "externalids"("elementId");
+CREATE UNIQUE INDEX "Element_id_key" ON "Element"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Element_title_key" ON "Element"("title");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Genre_elementId_key" ON "Genre"("elementId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Metadata_elementId_key" ON "Metadata"("elementId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Element_id_key" ON "Element"("id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Element_title_key" ON "Element"("title");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Query_id_key" ON "Query"("id");
@@ -225,14 +222,14 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "User_nickname_key" ON "User"("nickname");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "externalids_elementId_key" ON "externalids"("elementId");
+
 -- AddForeignKey
 ALTER TABLE "Cast" ADD CONSTRAINT "Cast_creditsId_fkey" FOREIGN KEY ("creditsId") REFERENCES "Credits"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Credits" ADD CONSTRAINT "Credits_elementId_fkey" FOREIGN KEY ("elementId") REFERENCES "Element"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "externalids" ADD CONSTRAINT "externalids_elementId_fkey" FOREIGN KEY ("elementId") REFERENCES "Element"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Genre" ADD CONSTRAINT "Genre_elementId_fkey" FOREIGN KEY ("elementId") REFERENCES "Element"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -248,3 +245,6 @@ ALTER TABLE "Query" ADD CONSTRAINT "Query_userId_fkey" FOREIGN KEY ("userId") RE
 
 -- AddForeignKey
 ALTER TABLE "Ratings" ADD CONSTRAINT "Ratings_elementId_fkey" FOREIGN KEY ("elementId") REFERENCES "Element"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "externalids" ADD CONSTRAINT "externalids_elementId_fkey" FOREIGN KEY ("elementId") REFERENCES "Element"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

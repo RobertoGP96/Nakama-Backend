@@ -22,6 +22,7 @@ export class ApiKeyModel {
         name: input.name,
         token: input.token,
         status: input.status,
+        
       },
     });
   }

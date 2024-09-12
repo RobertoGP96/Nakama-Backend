@@ -7,6 +7,8 @@ import {
   tmdbDetail,
   tmdbExternalsIds,
   tmdbImages,
+  tmdbResult,
+  tmdbSearch,
   tmdbTraslations,
 } from "../types/tmdb";
 
@@ -25,14 +27,17 @@ export class TmdbServise {
     pageParam,
     search,
     type,
+    year
   }: {
     pageParam: number;
     search: string;
     type: string;
-  }) => {
+    year: string
+  }):Promise<tmdbSearch> => {
+
     return await fetch(
       this.base_url +
-        `search/${type}?query=${search}&include_adult=false&page=${pageParam}`,
+        `search/${type}?query=${search}&include_adult=true${year?`&year=${year}`:``}&language=es-ES&page=${pageParam}`,
       this.options
     ).then(async (res) => {
       

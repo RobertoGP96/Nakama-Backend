@@ -4,16 +4,9 @@ import { extractMetadata } from "./copilot";
 import { extractInfoSource } from "./extract_info_source";
 import { SourceMeta } from "../types/source";
 
-type elementDir = {
-  title: string;
-  year: string;
-  path: string;
-  content: string[];
-  metadata: createMetadata;
-};
 
 export async function ReadDir(direccion: string): Promise<elementDir[] | undefined> {
-  // Verifica si la dirección es un directorio
+  // Verificación de directorio
 
   if (!fs.existsSync(direccion)) {
     return undefined;

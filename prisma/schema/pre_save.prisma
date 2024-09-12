@@ -1,0 +1,9 @@
+model PreSave {
+    id       String   @id @default(cuid())
+    createat DateTime @default(now())
+    updateat DateTime @updatedAt
+
+    pre_elements Int[]
+    resource    Resource @relation(fields: [resource_id], references: [id])
+    resource_id Int      @unique
+}
