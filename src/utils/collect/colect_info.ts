@@ -1,14 +1,14 @@
-import { createElement, Element } from "../types/element";
-import { omdbElement } from "../types/omdb";
-import { BigQuery, Cast } from "../types/tmdb";
+import { createElement, Element } from "../../types/element";
+import { omdbElement } from "../../types/omdb";
+import { BigQuery, Cast } from "../../types/tmdb";
 
-import { createCredits } from "../types/credits";
-import { createCast } from "../types/cast";
-import { createGenre } from "../types/genre";
+import { createCredits } from "../../types/credits";
+import { createCast } from "../../types/cast";
+import { createGenre } from "../../types/genre";
 import { genreName } from "@prisma/client";
-import { oldElement } from "../types/old_db";
-import { TmdbServise } from "../services/tmdb";
-import { OMDBServise } from "../services/omdb";
+import { oldElement } from "../../types/old_db";
+import { TmdbServise } from "../../services/tmdb";
+import { OMDBServise } from "../../services/omdb";
 
 import {tmdb_genres} from "./tmdb_genres"
 

@@ -1,11 +1,11 @@
 import fs from "fs";
 import path from "path";
-import { extractMetadata } from "./copilot";
-import { extractInfoSource } from "./extract_info_source";
-import { SourceMeta } from "../types/source";
+import { extractMetadata } from "../metadata/extract_metadata";
+import { extractInfoSource } from "../collect/extract_info_source";
+import { SourceMeta } from "../../types/source";
 
 
-export async function ReadDir(direccion: string): Promise<elementDir[] | undefined> {
+export async function ReadDirPath(direccion: string): Promise<elementDir[] | undefined> {
   // Verificación de directorio
 
   if (!fs.existsSync(direccion)) {

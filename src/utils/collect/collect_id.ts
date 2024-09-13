@@ -1,7 +1,7 @@
-import { OMDBServise } from "../services/omdb";
-import { TmdbServise } from "../services/tmdb";
+import { OMDBServise } from "../../services/omdb";
+import { TmdbServise } from "../../services/tmdb";
 
-export function extractMetadata(itemCollect: elementDir, type: string) {
+export function extractId(itemCollect: elementDir, type: string) {
   TmdbServise.Search({
     pageParam: 1,
     search: itemCollect.title,
@@ -16,4 +16,5 @@ export function extractMetadata(itemCollect: elementDir, type: string) {
     else
     return results.results[0].id ;
   });
+
 }

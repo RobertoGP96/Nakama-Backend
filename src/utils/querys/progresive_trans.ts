@@ -1,7 +1,7 @@
-import { Nprisma } from "../../prisma/prisma";
-import { createElement } from "../types/element";
-import { oldElement } from "../types/old_db";
-import { BackupOldDB } from "./save_backup_info";
+import { Nprisma } from "../../../prisma/prisma";
+import { createElement } from "../../types/element";
+import { oldElement } from "../../types/old_db";
+import { BackupOldDB } from "../backup/save_backup_info";
 
 export async function LimitActionOldDB({
   batchSize,

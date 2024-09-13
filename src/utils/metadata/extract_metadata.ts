@@ -1,5 +1,5 @@
 import { ExifTool } from 'exiftool-vendored';
-import { SourceMeta } from '../types/source';
+import { SourceMeta } from '../../types/source';
 
 const exiftool = new ExifTool();
 

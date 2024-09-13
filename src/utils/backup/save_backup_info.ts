@@ -1,10 +1,10 @@
-import { oldElement } from "../types/old_db";
-import { TmdbServise } from "../services/tmdb";
-import { OMDBServise } from "../services/omdb";
-import { CollectInfo } from "./colect_info";
+import { oldElement } from "../../types/old_db";
+import { TmdbServise } from "../../services/tmdb";
+import { OMDBServise } from "../../services/omdb";
+import { CollectInfo } from "../collect/colect_info";
 
-import { ElementModel } from "../models/element";
-import { createElement } from "../types/element";
+import { ElementModel } from "../../models/element";
+import { createElement } from "../../types/element";
 export function BackupOldDBAltern({
   oldItem,
 }: {
@@ -85,7 +85,6 @@ export async function BackupOldDB({ oldItem }: { oldItem: oldElement }) {
           type: "tv",
           year: oldItem.omdbDB.Year,
         }).then((omdbItem) => {
-          console.log("Start++>>>>");
           return ElementModel.create({
             input: CollectInfo.takeInfo({ omdbItem, tmdbItem }),
           });

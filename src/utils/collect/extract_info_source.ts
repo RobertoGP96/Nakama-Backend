@@ -1,5 +1,5 @@
-import { SourceMeta } from "../types/source";
-import codec_list from "../utils/codec_format.json"
+import { SourceMeta } from "../../types/source";
+import codec_list from "./codec_format.json"
 
 export function extractInfoSource( source: SourceMeta ): createMetadata {
     return {

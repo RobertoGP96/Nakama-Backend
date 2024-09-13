@@ -27,6 +27,7 @@ const app = express()
 app.use(express.json());
 app.disable('x-powered-by')
 
+//Acces key middleware
 app.use(AuthMiddleware.verifyApiKEyToken)
 //Data
 app.use('/elements', ElementRouter)
@@ -41,6 +42,7 @@ app.use('/genre', GenreRouter)
 app.use('/credits', CreditsRouter)
 app.use('/pre_save', PreSaveRouter)
 
+//Authentication
 app.use('/users', UserRouter)
 
 app.use('/auth', AuthRouter)
@@ -48,7 +50,7 @@ app.use('/auth', AuthRouter)
 //API KEY Access
 app.use('/api_key', ApiKeyRouter)
 
-//Services
+//Info Services
 app.use('/tmdb', TmdbRouter)
 app.use('/omdb', OmdbRouter)
 

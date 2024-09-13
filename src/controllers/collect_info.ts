@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 
-import { CollectInfo } from "../utils/colect_info";
+import { CollectInfo } from "../utils/collect/colect_info";
 import db from "../db/backup/old_data.json";
 import { exec } from "child_process";
-import { ReadDir } from "../utils/read_dir";
-import { extractMetadata } from "../utils/copilot";
-import { LimitActionOldDB } from "../utils/progresive_trans";
-import { BackupOldDBAltern } from "../utils/save_backup_info";
+import { ReadDir } from "../utils/path/read_dir";
+import { extractMetadata } from "../utils/metadata/extract_metadata";
+import { LimitActionOldDB } from "../utils/querys/progresive_trans";
+import { BackupOldDBAltern } from "../utils/backup/save_backup_info";
 import { ElementModel } from "../models/element";
 
 export class CollectInfoController {
