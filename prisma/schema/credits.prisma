@@ -1,10 +1,10 @@
 model Credits {
-  id             Int        @id @default(autoincrement())
-  createat       DateTime   @default(now())
-  updateat       DateTime   @updatedAt
-  
-  element        Element    @relation(fields: [elementId], references: [id])
-  elementId      Int @unique
+  id       Int      @id @default(autoincrement())
+  createat DateTime @default(now())
+  updateat DateTime @updatedAt
 
-  cast_members   Cast[]
+  element   Element @relation(fields: [elementId], references: [id])
+  elementId Int     @unique
+
+  cast_members Cast[]
 }

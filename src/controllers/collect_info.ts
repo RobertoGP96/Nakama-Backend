@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { CollectInfo } from "../utils/collect/colect_info";
 import db from "../db/backup/old_data.json";
 import { exec } from "child_process";
-import { ReadDir } from "../utils/path/read_dir";
+import { ReadDirPath } from "../utils/path/read_dir";
 import { extractMetadata } from "../utils/metadata/extract_metadata";
 import { LimitActionOldDB } from "../utils/querys/progresive_trans";
 import { BackupOldDBAltern } from "../utils/backup/save_backup_info";
@@ -93,7 +93,7 @@ export class CollectInfoController {
     const { url } = req.body;
     if (!url) res.status(400).send({ message: "Undefine Dir_Path" });
     else {
-      const dirs = ReadDir(url);
+      const dirs = ReadDirPath(url);
 
       if (!dirs) res.status(400).send({ message: "Wrong Dir_Path" });
       else res.send({ result: dirs });

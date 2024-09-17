@@ -1,7 +1,7 @@
 import { SourceMeta } from "../../types/source";
 import codec_list from "./codec_format.json"
 
-export function extractInfoSource( source: SourceMeta ): createMetadata {
+export function extractInfoSource( source: SourceMeta ): auxMetadata {
     return {
         audio:"",
         codec: codec(source.CompressorID as string),

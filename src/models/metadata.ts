@@ -12,4 +12,11 @@ export class MetaDataModel {
       }
     })
   }
+  static async create({input}:{input: createMetadata}){
+    return await Nprisma.metadata.create({
+      data: {
+        ...input
+      }
+    })
+  }
 }

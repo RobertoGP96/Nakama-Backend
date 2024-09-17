@@ -1,18 +1,18 @@
 model Cast {
-    id             Int      @id @default(autoincrement())
-    
-    createat       DateTime @default(now())
-    updateat       DateTime @updatedAt
-    
-    name           String
-    originalName   String
+  id Int @id @default(autoincrement())
 
-    character      String
+  createat DateTime @default(now())
+  updateat DateTime @updatedAt
 
-    credits   Credits @relation(fields: [creditsId], references: [id])
-    creditsId Int
+  name         String
+  originalName String
 
-    department Department
+  character String
+
+  credits   Credits @relation(fields: [creditsId], references: [id])
+  creditsId Int
+
+  department Department
 }
 
 enum Department {

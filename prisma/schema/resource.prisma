@@ -1,15 +1,13 @@
 model Resource {
-    id     Int    @unique @default(autoincrement())
-    addres String @unique
+  id     Int    @unique @default(autoincrement())
+  addres String @unique
 
-    type categoryName
+  device   String   @default("")
+  
+  type categoryName
 
-    createat DateTime @default(now())
-    updateat DateTime @updatedAt
+  createat DateTime @default(now())
+  updateat DateTime @updatedAt
 
-    e_founds_count  Int[] @default([])
-    e_pending_count Int[] @default([])
-    e_founds        Int[] @default([])
-
-    pre_save PreSave?
+  pre_save PreSave?
 }

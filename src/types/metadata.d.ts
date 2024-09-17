@@ -1,6 +1,8 @@
 interface Metadata{
     id: number
-    elementId: number | null
+    elementId: number
+
+    path: string
 
     storage: number
     duration: number
@@ -13,4 +15,6 @@ interface Metadata{
     
 }
 
-type createMetadata = Omit<Metadata, 'id' | 'elementId'>
+type createMetadata = Omit<Metadata, 'id'>
+type tmpMetadata = Omit<Metadata, 'id'| 'elementId'>
+type auxMetadata = Omit<Metadata, 'id'| 'elementId'| 'path'>

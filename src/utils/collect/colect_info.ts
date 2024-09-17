@@ -39,6 +39,8 @@ export class CollectInfo {
       },
 
       metadata: {
+        elementId:0,
+        path:"",
         audio: "EN",
         codec: "h264",
         duration: 82.34,

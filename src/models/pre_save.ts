@@ -5,19 +5,21 @@ export class PreSaveModel {
     return await Nprisma.preSave.findMany();
   }
 
-  static async getByID({ id }:{ id: string}) {
+  static async getByID({ id }: { id: string }) {
     return await Nprisma.preSave.findUnique({
       where: {
         id: id,
       },
     });
   }
-  static async create({ input }:{input: createPreSave}) {
+  static async create({ input }: { input: createPreSave }) {
     return await Nprisma.preSave.create({
-      data:{
+      data: {
         pre_elements: input.pre_elements,
-        resource_id: input.resource_id
-    }});
+        save_elements: input.save_elements,
+        resource_id: input.resource_id,
+      },
+    });
   }
 
   static async delete({ id }) {
@@ -28,13 +30,13 @@ export class PreSaveModel {
     });
   }
 
-  static async update({ id, input }: { id: string ; input: editPreSave }) {
+  static async update({ id, input }: { id: string; input: editPreSave }) {
     return await Nprisma.preSave.update({
       where: {
         id: id,
       },
       data: {
-        pre_elements: input.pre_elements
+        pre_elements: input.pre_elements,
       },
     });
   }

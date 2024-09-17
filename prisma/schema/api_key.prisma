@@ -1,12 +1,12 @@
 model Api_Key {
-    id String @id @default(cuid())
+  id String @id @default(cuid())
 
-    status Boolean @default(false)
+  status Boolean @default(false)
 
-    name String @unique
+  name String @unique
 
-    token String @unique
+  token String @unique
 
-    createat DateTime @default(now())
-    updateat DateTime @updatedAt
+  createat DateTime @default(now())
+  updateat DateTime @updatedAt
 }

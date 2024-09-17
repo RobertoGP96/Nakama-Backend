@@ -47,19 +47,6 @@ export class ElementModel {
             omdb_id: input.externalids.omdb_id,
           },
         },
-
-        //Metadata
-        metadata: {
-          create: {
-            audio: input.metadata.audio,
-            codec: input.metadata.codec,
-            duration: input.metadata.duration,
-            fps: input.metadata.fps,
-            resolution: input.metadata.resolution,
-            storage: input.metadata.storage,
-            subtitle: input.metadata.subtitle,
-          },
-        },
         
         //Ratings
         ratings: {

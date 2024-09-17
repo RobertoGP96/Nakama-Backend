@@ -79,7 +79,5 @@ export class ApiKeyController {
     catch{
       return res.status(400).json({ message: "Error updating" })
     }
-
-    
   }
 }

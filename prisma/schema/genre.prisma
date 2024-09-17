@@ -1,9 +1,9 @@
 model Genre {
-  id       Int       @id @default(autoincrement())
-  genres     genreName[]
+  id     Int         @id @default(autoincrement())
+  genres genreName[]
 
   element   Element? @relation(fields: [elementId], references: [id])
-  elementId Int     @unique
+  elementId Int      @unique
 }
 
 enum genreName {

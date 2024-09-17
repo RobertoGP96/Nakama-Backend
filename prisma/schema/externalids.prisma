@@ -1,13 +1,12 @@
 model externalids {
-    id         Int      @id @default(autoincrement())
-    createat   DateTime @default(now())
-    updateat   DateTime @updatedAt
+  id       Int      @id @default(autoincrement())
+  createat DateTime @default(now())
+  updateat DateTime @updatedAt
 
-    element   Element? @relation(fields: [elementId], references: [id])
-    elementId Int     @unique
+  element   Element? @relation(fields: [elementId], references: [id])
+  elementId Int      @unique
 
-    imdb_id String
-    tmdb_id String
-    omdb_id String
+  imdb_id String
+  tmdb_id String
+  omdb_id String
 }
-

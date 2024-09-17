@@ -1,17 +1,19 @@
 model Metadata {
-    id Int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-    createat DateTime @default(now())
-    updateat DateTime @updatedAt
+  path String @default("")
 
-    storage    Decimal @default(0)
-    duration   Decimal @default(0)
-    fps        Decimal @default(0)
-    resolution String  @default("1080p")
-    codec      String  @default("h264")
-    audio      String  @default("es_ES")
-    subtitle   String  @default("es_ES")
+  createat DateTime @default(now())
+  updateat DateTime @updatedAt
 
-    element   Element @relation(fields: [elementId], references: [id])
-    elementId Int     @unique
+  storage    Decimal @default(0)
+  duration   Decimal @default(0)
+  fps        Decimal @default(0)
+  resolution String  @default("1080p")
+  codec      String  @default("h264")
+  audio      String  @default("es_ES")
+  subtitle   String  @default("es_ES")
+
+  element   Element @relation(fields: [elementId], references: [id])
+  elementId Int     @unique
 }

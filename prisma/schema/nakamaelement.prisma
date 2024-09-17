@@ -1,5 +1,5 @@
 model Element {
-  id   Int @id @default(autoincrement()) @unique
+  id   Int @id @unique @default(autoincrement())
   year Int
 
   poster   String
@@ -25,6 +25,7 @@ model Element {
   plot     String
   abstract String
 
-  createat DateTime @default(now())
-  updateat DateTime @updatedAt
+  createat   DateTime     @default(now())
+  updateat   DateTime     @updatedAt
+
 }

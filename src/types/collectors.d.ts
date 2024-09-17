@@ -3,7 +3,6 @@ interface elementDir {
     year: string;
     path: string;
     content: string[];
-    metadata: createMetadata;
   };
 
 interface elementDirS extends elementDir {
