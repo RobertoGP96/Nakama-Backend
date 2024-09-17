@@ -1,6 +1,6 @@
 model Element {
   id   Int @id @unique @default(autoincrement())
-  year Int
+  year String
 
   poster   String
   backdrop String

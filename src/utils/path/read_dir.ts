@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
-import { extractMetadata } from "../metadata/extract_metadata";
-import { extractInfoSource } from "../collect/extract_info_source";
-import { SourceMeta } from "../../types/source";
+//import { extractMetadata } from "../metadata/extract_metadata";
+//import { extractInfoSource } from "../collect/extract_info_source";
+//import { SourceMeta } from "../../types/source";
 
 
 export async function ReadDirPath(direccion: string): Promise<elementDir[] | undefined> {

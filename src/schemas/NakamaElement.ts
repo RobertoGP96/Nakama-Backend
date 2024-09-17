@@ -6,8 +6,8 @@ import { MetadataSchema } from "./metadata";
 import { RatingSchema } from "./rating";
 
 export const ElementSchema = z.object({
-  year: z.number({
-    invalid_type_error: "Year must be a number",
+  year: z.string({
+    invalid_type_error: "Year must be a string",
     required_error: "Year is required",
   }),
   country: z.string({

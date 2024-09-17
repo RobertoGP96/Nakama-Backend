@@ -30,7 +30,7 @@ export class CollectInfo {
       country: omdbItem.Country,
       original_title: tmdbItem.original_title,
       plot: tmdbItem.overview,
-      year: Number(omdbItem.Year),
+      year: omdbItem.Year,
 
       externalids: {
         imdb_id: tmdbItem.imdb_id,

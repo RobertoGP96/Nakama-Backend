@@ -6,7 +6,7 @@ import { createCredits } from "./credits";
 
 interface Element {
   id: number;
-  year: number;
+  year: string;
   country: string;
 
   backdrop: string;
@@ -32,7 +32,7 @@ interface Element {
 }
 type editElement = Omit<Element, 'id' >
 interface createElement {
-  year: number;
+  year: string;
   country: string;
 
   backdrop_path: string;
