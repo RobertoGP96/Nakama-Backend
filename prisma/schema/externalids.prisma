@@ -3,7 +3,7 @@ model externalids {
   createat DateTime @default(now())
   updateat DateTime @updatedAt
 
-  element   Element? @relation(fields: [elementId], references: [id])
+  element   Element? @relation(fields: [elementId], references: [id],onDelete: Cascade, onUpdate: Cascade)
   elementId Int      @unique
 
   imdb_id String

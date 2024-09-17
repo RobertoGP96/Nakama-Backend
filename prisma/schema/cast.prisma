@@ -9,7 +9,7 @@ model Cast {
 
   character String
 
-  credits   Credits @relation(fields: [creditsId], references: [id])
+  credits   Credits @relation(fields: [creditsId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   creditsId Int
 
   department Department

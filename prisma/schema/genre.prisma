@@ -2,7 +2,7 @@ model Genre {
   id     Int         @id @default(autoincrement())
   genres genreName[]
 
-  element   Element? @relation(fields: [elementId], references: [id])
+  element   Element? @relation(fields: [elementId], references: [id],onDelete: Cascade, onUpdate: Cascade)
   elementId Int      @unique
 }
 

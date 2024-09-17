@@ -3,9 +3,9 @@ model PreSave {
   createat DateTime @default(now())
   updateat DateTime @updatedAt
 
-  pre_elements String[]
+  pre_elements  String[]
   save_elements Int[]
-  
-  resource     Resource @relation(fields: [resource_id], references: [id])
-  resource_id  Int      @unique
+
+  resource    Resource @relation(fields: [resource_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  resource_id Int      @unique
 }

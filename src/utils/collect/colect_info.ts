@@ -82,6 +82,8 @@ export class CollectInfo {
           character: tmp.character as string,
           department: "ACTOR",
         });
+        if (casting.length>5)
+          return
       });
     }
     //
