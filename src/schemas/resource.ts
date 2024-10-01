@@ -8,16 +8,10 @@ export const ResourceSchema = z.object({
     type: z.string({
         invalid_type_error: "Type must be a string",
     }) ,
-    e_found_count: z.number({
-        invalid_type_error: "E_Found must be a string",
+    device: z.string({
+        invalid_type_error: "Device must be a string",
         
     }),
-    e_pending_count: z.number({
-        invalid_type_error: "E_pend must be a string",
-    }),
-    e_founds: z.number({
-        invalid_type_error: "E_ids must be a number array",
-    }).array()
 }).partial()
 
 

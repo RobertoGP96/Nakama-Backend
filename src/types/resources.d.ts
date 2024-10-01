@@ -4,12 +4,9 @@ interface resourceItem {
   id: string;
   addres: string;
   
+  device: string;
+
   type: categoryName;
-
-  e_found_count: number[];
-  e_pending_count: number[];
-  e_founds: number[];
-
 }
 
 enum categoryR {

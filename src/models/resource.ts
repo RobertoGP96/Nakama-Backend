@@ -1,5 +1,5 @@
 import { Nprisma } from "../../prisma/prisma";
-import { createResourse, editResourse, resourceItem } from "../types/resources";
+import { createResourse, editResourse } from "../types/resources";
 
 export class ResourceModel {
   static async getAll() {
