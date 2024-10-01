@@ -107,7 +107,7 @@ export class ElementController {
       return (
         filters.title.toLowerCase().includes(e.title) ||
         filters.title.toLowerCase().includes(e.title_original) ||
-        (filters.year[0] >= e.year && filters.year[1] <= e.year) ||
+        (Number(filters.year[0]) >=  Number(e.year) && Number(filters.year[1]) <= Number(e.year)) ||
         filters.country == e.country ||
         filters.category.toLocaleString().includes(e.category)
       );

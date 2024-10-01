@@ -28,7 +28,7 @@ app.use(express.json());
 app.disable('x-powered-by')
 
 //Acces key middleware
-app.use(AuthMiddleware.verifyApiKEyToken)
+app.use(AuthMiddleware.verifyApiKeyToken)
 //Data
 app.use('/elements', ElementRouter)
 app.use('/cast', CastRouter)

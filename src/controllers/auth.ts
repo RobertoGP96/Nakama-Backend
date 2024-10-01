@@ -63,7 +63,7 @@ export class AuthController {
       const checkUniq = await UserModel.uniqueCheck({
         input: {
           email: inputv.data.email,
-          nickname: inputv.data.nickname,
+          nickname: inputv.data.nickname, 
           phone: inputv.data.phone,
         },
       });
@@ -93,14 +93,12 @@ export class AuthController {
     }
   }
   static async logout(_req: Request, res: Response) {
-    res.clearCookie('access_token')
-    .json(
-      {
-        message: 'Logout successful'
-      }
-    )
+    res.clearCookie("access_token").json({
+      message: "Logout successful",
+    });
   }
+
   static async protected(_req: Request, res: Response) {
-    return res.send("Protected Content")
+    return res.send("Protected Content");
   }
 }

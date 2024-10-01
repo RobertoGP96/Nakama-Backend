@@ -26,9 +26,9 @@ export class ApiKeyController {
     const newApiKey: newApiKey = req.body;
 
     //Input Validation
-    const newAKV= validateApiKey(newApiKey)
-    if(newAKV.error){
-      res.status(400).json(newAKV.error.message)
+    const newAKV = validateApiKey(newApiKey);
+    if (newAKV.error) {
+      res.status(400).json(newAKV.error.message);
     }
 
     const createdApiKey: ApiKey = await ApiKeyModel.create({
@@ -51,33 +51,53 @@ export class ApiKeyController {
 
   static async update(req: Request, res: Response) {
     const { id } = req.params;
-    const editApiKey: createApiKey = req.body;
+    const editApiKey: updateApiKey = req.body;
 
     //Input Validation
-    const editAKV= validateApiKey(editApiKey)
-    if(editAKV.error){
-      res.status(400).json(editAKV.error.message)
+    const editAKV = validateApiKey(editApiKey);
+    if (editAKV.error) {
+      res.status(400).json(editAKV.error.message);
     }
     //Check ID
-    if (
-      (
-        (await ApiKeyModel.checkID({ id })) ||
-        (await ApiKeyModel.checkUniqueFields({ id, input: editApiKey }))
-      )
-    )
+    if (await ApiKeyModel.checkID({ id }))
       return res.status(400).json({
         message: "Check unique fields",
       });
-    try{
+    try {
       const updatedApiKey = ApiKeyModel.update({ id, input: editApiKey });
       return res.status(200).json({
         name: (await updatedApiKey).name,
         token: (await updatedApiKey).token,
-        status: (await updatedApiKey).token,
+        status: (await updatedApiKey).status,
       });
-    } 
-    catch{
-      return res.status(400).json({ message: "Error updating" })
+    } catch {
+      return res.status(400).json({ message: "Error updating" });
     }
+  }
+  static async generate(req: Request, res: Response) {
+    const { id } = req.params;
+    
+    ApiKeyModel.getByID({ id }).then((data) => {
+      if(!data)
+        return res.status(400).json({
+          message: "Check unique fields",
+        });
+      
+      return ApiKeyModel.generate({
+        id,
+        token: jwt.sign(
+          {
+            id: data?.id,
+            name: data?.name,
+          },
+          process.env.SECRET_KEY as string
+        ),
+      }).then((data) => {
+        return res.status(200).json({
+          message: "Api Key generated",
+          token: data
+        });
+      });
+    });
   }
 }

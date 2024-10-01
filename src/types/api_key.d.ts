@@ -7,4 +7,6 @@ type ApiKey ={
     token: string
 }
 type createApiKey = Omit<ApiKey, 'id' | 'createat' | 'updateat'>
+type updateApiKey = Pick<ApiKey, 'name' | 'status'>
 type newApiKey = Omit<ApiKey, 'id' | 'createat' | 'updateat'| 'token'>
+
