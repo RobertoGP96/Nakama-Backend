@@ -22,6 +22,8 @@ import { OmdbRouter } from './routes/omdb'
 import { CollectInfoRouter } from './routes/collect_info'
 import { PreSaveRouter } from './routes/pre_save'
 
+import cors from "cors"
+
 const app = express()
 
 app.use(express.json());
@@ -30,6 +32,17 @@ app.disable('x-powered-by')
 //Acces key middleware
 //app.use(AuthMiddleware.verifyApiKeyToken)
 //Data
+
+const corsOptions = {
+  origin: 'http://localhost:5173', // Cambia esto por el origen que deseas permitir
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Si necesitas permitir cookies
+  optionsSuccessStatus: 204 // Para navegadores antiguos
+};
+
+app.use(cors(corsOptions));
+
+
 app.use('/elements', ElementRouter)
 app.use('/cast', CastRouter)
 app.use('/collections', CollectionRouter)
