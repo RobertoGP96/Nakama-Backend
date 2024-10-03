@@ -35,7 +35,7 @@ export class AuthController {
 
           const infoOut = {
             nickname: userLoguin.nickname,
-            email: userLoguin.email,
+            role: userLoguin.role,
             token: token,
           };
 

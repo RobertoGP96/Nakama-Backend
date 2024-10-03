@@ -44,7 +44,8 @@ export class UserController {
   }
 
   static async create(req, res) {
-    const input: User = req.body;
+    const input: newUser = req.body;
+    //ljjkdhsf
 
     const inputV = validateUser(req.body);
     if (inputV.error)
