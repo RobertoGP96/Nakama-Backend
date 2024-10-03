@@ -116,31 +116,19 @@ export class ApiKeyController {
   }
 
   static async changeStatus(req: Request, res: Response) {
-    type status ={
-      status: boolean
-    }
     const { id } = req.params;
-    const editApiKey: status= req.body;
 
-    //Check ID
-    if (await ApiKeyModel.checkID({ id }))
-      return res.status(400).json({
-    message: "Wrong ID",
-  });
-  try {
-    return ApiKeyModel.getByID({id}).then((data)=>{
-        const tmp : updateApiKey={
-          name: data?.name as string,
-          status: editApiKey.status
-        }
-        ApiKeyModel.update({ id, input: tmp }).then(()=>{
-          return res.status(200).json({message:"Change status"})
-        })
+    ApiKeyModel.getByID({ id }).then((data) => {
+      if (!data) res.status(404).send({ message: "Id not found" });
 
-        
-      })
-    } catch {
-      return res.status(400).json({ message: "Error updating" });
-    }
+      const tmp: updateApiKey = {
+        name: data?.name as string,
+        status: data?.status as boolean,
+      };
+
+      ApiKeyModel.update({ id, input: tmp }).then(() => {
+        res.status(200).json({ message: "Change status" });
+      });
+    });
   }
 }
