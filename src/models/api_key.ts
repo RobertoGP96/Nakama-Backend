@@ -22,6 +22,13 @@ export class ApiKeyModel {
       },
     });
   }
+  static async delete({ id }) {
+    return await Nprisma.api_Key.delete({
+      where: {
+        id: id,
+      },
+    });
+  }
 
   static async create({ input }: { input: createApiKey }) {
     return await Nprisma.api_Key.create({

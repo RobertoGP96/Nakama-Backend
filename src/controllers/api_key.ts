@@ -76,13 +76,13 @@ export class ApiKeyController {
   }
   static async generate(req: Request, res: Response) {
     const { id } = req.params;
-    
+
     ApiKeyModel.getByID({ id }).then((data) => {
-      if(!data)
+      if (!data)
         return res.status(400).json({
           message: "Check unique fields",
         });
-      
+
       return ApiKeyModel.generate({
         id,
         token: jwt.sign(
@@ -95,8 +95,22 @@ export class ApiKeyController {
       }).then((data) => {
         return res.status(200).json({
           message: "Api Key generated",
-          token: data
+          token: data,
         });
+      });
+    });
+  }
+  static async delete(req: Request, res: Response) {
+    const { id } = req.params;
+
+    ApiKeyModel.getByID({ id }).then((data) => {
+      if (!data)
+        return res.status(404).json({
+          message: "Id no encontrado",
+        });
+
+      return ApiKeyModel.delete({ id }).then((e) => {
+        return res.status(200).send(e);
       });
     });
   }
