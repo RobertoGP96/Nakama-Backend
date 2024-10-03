@@ -128,7 +128,7 @@ export class ApiKeyController {
     message: "Wrong ID",
   });
   try {
-      ApiKeyModel.getByID({id}).then((data)=>{
+    return ApiKeyModel.getByID({id}).then((data)=>{
         const tmp : updateApiKey={
           name: data?.name as string,
           status: editApiKey.status
@@ -139,7 +139,6 @@ export class ApiKeyController {
 
         
       })
-      
     } catch {
       return res.status(400).json({ message: "Error updating" });
     }
