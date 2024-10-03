@@ -123,7 +123,7 @@ export class ApiKeyController {
 
       const tmp: updateApiKey = {
         name: data?.name as string,
-        status: data?.status as boolean,
+        status: !data?.status as boolean,
       };
 
       ApiKeyModel.update({ id, input: tmp }).then(() => {
