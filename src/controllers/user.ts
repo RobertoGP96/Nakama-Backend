@@ -8,7 +8,7 @@ export class UserController {
       if (getall.length>0) {
         res.status(200).json(getall);
       }else{
-        res.status(200).json({ message: "Is Empty" });
+        res.status(200).json([]);
       }
     } catch {
       return res.status(500).json({ message: "Something is wrong" });
