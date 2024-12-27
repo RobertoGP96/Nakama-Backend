@@ -17,14 +17,12 @@ export const ElementSchema = z.object({
     .string({
       invalid_type_error: "Backdrop must be a number",
       required_error: "Backdrop is required",
-    })
-    .url(),
+    }),
   poster_path: z
     .string({
       invalid_type_error: "Poster must be a number",
       required_error: "Poster is required",
-    })
-    .url(),
+    }),
   category: z.string({
     invalid_type_error: "Category must be a number",
     required_error: "Category is required",
@@ -52,10 +50,10 @@ export const ElementSchema = z.object({
   }),
 
   genres: GenreSchema.required(),
-  credits: CreditsSchema.required(),
-  externalids: ExternalIdsSchema.required(),
-  metadata: MetadataSchema.required(),
-  ratings: RatingSchema.required(),
+  credits: CreditsSchema,
+  externalids: ExternalIdsSchema,
+  metadata: MetadataSchema,
+  ratings: RatingSchema,
 }).partial();
 
 export function validateElement(input) {
