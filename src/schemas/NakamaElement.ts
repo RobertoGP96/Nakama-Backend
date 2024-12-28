@@ -49,7 +49,6 @@ export const ElementSchema = z.object({
     required_error: "Abstract is required",
   }),
 
-  genres: GenreSchema,
   credits: CreditsSchema,
   externalids: ExternalIdsSchema,
   metadata: MetadataSchema,
