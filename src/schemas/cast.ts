@@ -2,8 +2,8 @@ import { object, number, string } from 'zod'
 
 export const CastSchema = object({
   name: string({
-    invalid_type_error: 'Rating must be a string.',
-    required_error: 'Rating is required'
+    invalid_type_error: 'Name must be a string.',
+    required_error: 'Name is required'
   }),
   originalName: string({
     invalid_type_error: 'Original Name must be a string.'
