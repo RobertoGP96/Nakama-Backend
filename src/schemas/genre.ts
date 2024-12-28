@@ -1,9 +1,8 @@
-import z from 'zod'
-import { CastSchema } from './cast'
+import z, { string } from 'zod'
 
 
 export const GenreSchema = z.object({
-    genres: CastSchema.required().array()
+    genres: z.string().array()
 })
 export function validateGenre(input) {
     return GenreSchema.safeParse(input)
