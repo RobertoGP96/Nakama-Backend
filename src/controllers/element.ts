@@ -53,8 +53,8 @@ export class ElementController {
         if (!createdL)
           return res.status(400).json({ message: "Element not created" });
         return res.status(201).json({ message: "Element created" });
-      } catch {
-        res.status(400).json({ message: "Error creating" });
+      } catch(error){
+        res.status(400).json({ message: "Error creating", error: error });
       }
     }
   }
