@@ -27,6 +27,7 @@ CREATE TABLE "Cast" (
     "name" TEXT NOT NULL,
     "originalName" TEXT NOT NULL,
     "character" TEXT NOT NULL,
+    "porfile" TEXT NOT NULL,
     "creditsId" INTEGER NOT NULL,
     "department" "Department" NOT NULL,
 

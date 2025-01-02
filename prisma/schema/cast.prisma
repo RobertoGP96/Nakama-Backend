@@ -8,6 +8,7 @@ model Cast {
   originalName String
 
   character String
+  porfile String
 
   credits   Credits @relation(fields: [creditsId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   creditsId Int

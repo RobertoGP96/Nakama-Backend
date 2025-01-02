@@ -4,16 +4,15 @@ import { Request, Response } from "express";
 import { validateElement } from "../schemas/NakamaElement";
 import { createMany } from "../types/controllers";
 import { Filter } from "../types/filter";
-import { Element, externalids } from "@prisma/client";
 import { ExtermalIdsModel } from "../models/externalids";
-import { checkElement } from "../types/element";
+import { checkElement, Element } from "../types/element";
 export class ElementController {
   static async getAll(_req: Request, res: Response) {
     const getall = await ElementModel.getAll();
     if (!getall) return res.status(400).json({ message: "Empty Source" });
     return res.status(200).json(getall);
   }
-  static async getByID(req, res) {
+  static async getByID(req: Request, res: Response) {
     const { id } = req.params;
     const numID = Number(id);
     try {
@@ -25,14 +24,14 @@ export class ElementController {
       return res.status(200).json({ message: "Error serching by id" });
     }
   }
-  static async delete(req, res) {
+  static async delete(req: Request, res: Response) {
     const { id } = req.params;
     const numId = Number(id);
     //ID Check
     const idCheck = ElementModel.getByID({ id: numId });
     if (!idCheck) return res.status(400).json({ message: "Id not found" });
     try {
-      const deleted = await ElementModel.delete({ id });
+      const deleted = await ElementModel.delete({ id: numId });
       if (!deleted)
         return res.status(400).json({ message: "Element not found" });
       return res.status(200).json({ message: "Element deleted" });
@@ -44,18 +43,16 @@ export class ElementController {
     const input = req.body;
 
     const inputV = validateElement(req.body);
-    //Schema Validation
     if (inputV.error)
       res.status(400).json({ message: JSON.parse(inputV.error.message) });
-    else {
-      try {
-        const createdL = await ElementModel.create({ input });
-        if (!createdL)
-          return res.status(400).json({ message: "Element not created" });
-        return res.status(201).json({ message: "Element created" });
-      } catch(error){
-        res.status(400).json({ message: "Error creating", error: error });
-      }
+
+    try {
+      const createdL = await ElementModel.create({ input });
+      if (!createdL)
+        return res.status(400).json({ message: "Element not created" });
+      return res.status(201).json({ message: "Element created" });
+    } catch (error) {
+      res.status(400).json({ message: "Error creating", error: error });
     }
   }
   static async createSimple(req, res) {
@@ -65,15 +62,14 @@ export class ElementController {
     //Schema Validation
     if (inputV.error)
       res.status(400).json({ message: JSON.parse(inputV.error.message) });
-    else {
-      try {
-        const createdL = await ElementModel.createSimple({ input });
-        if (!createdL)
-          return res.status(400).json({ message: "Element not created" });
-        return res.status(201).json({ message: "Element created" });
-      } catch(error){
-        res.status(400).json({ message: "Error creating", error: error });
-      }
+
+    try {
+      const createdL = await ElementModel.createSimple({ input });
+      if (!createdL)
+        return res.status(400).json({ message: "Element not created" });
+      return res.status(201).json({ message: "Element created" });
+    } catch (error) {
+      res.status(400).json({ message: "Error creating", error: error });
     }
   }
 
@@ -125,7 +121,8 @@ export class ElementController {
       return (
         filters.title.toLowerCase().includes(e.title) ||
         filters.title.toLowerCase().includes(e.title_original) ||
-        (Number(filters.year[0]) >=  Number(e.year) && Number(filters.year[1]) <= Number(e.year)) ||
+        (Number(filters.year[0]) >= Number(e.year) &&
+          Number(filters.year[1]) <= Number(e.year)) ||
         filters.country == e.country ||
         filters.category.toLocaleString().includes(e.category)
       );
@@ -137,7 +134,7 @@ export class ElementController {
     const IDs: createExternalIds = req.body;
     try {
       const resultsIds = (await ExtermalIdsModel.getAll()).filter(
-        (e: externalids) => {
+        (e: ExternalIds) => {
           e.imdb_id == IDs.imdb_id ||
             e.omdb_id == IDs.omdb_id ||
             e.tmdb_id == IDs.tmdb_id;

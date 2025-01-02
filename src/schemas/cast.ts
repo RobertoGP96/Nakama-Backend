@@ -1,3 +1,4 @@
+import { profile } from 'console'
 import { object, number, string } from 'zod'
 
 export const CastSchema = object({
@@ -14,6 +15,9 @@ export const CastSchema = object({
   department: string({
     invalid_type_error: 'Department must be string.',
     required_error: 'Department is required.',
+  }),
+  profile: string({
+    invalid_type_error: 'Porfile must be string.',
   })
 }).partial()
 export function validateCast(input) {
