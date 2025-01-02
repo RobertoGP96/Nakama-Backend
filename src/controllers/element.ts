@@ -58,6 +58,24 @@ export class ElementController {
       }
     }
   }
+  static async createSimple(req, res) {
+    const input = req.body;
+
+    const inputV = validateElement(req.body);
+    //Schema Validation
+    if (inputV.error)
+      res.status(400).json({ message: JSON.parse(inputV.error.message) });
+    else {
+      try {
+        const createdL = await ElementModel.createSimple({ input });
+        if (!createdL)
+          return res.status(400).json({ message: "Element not created" });
+        return res.status(201).json({ message: "Element created" });
+      } catch(error){
+        res.status(400).json({ message: "Error creating", error: error });
+      }
+    }
+  }
 
   static async update(req, res) {
     const { id } = req.params;

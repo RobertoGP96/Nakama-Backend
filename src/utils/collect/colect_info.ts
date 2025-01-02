@@ -23,16 +23,16 @@ export class CollectInfo {
     const newElement: createElement = {
       title: tmdbItem.title,
       abstract: "",
-      backdrop_path: tmdbItem.backdrop_path,
-      poster_path: tmdbItem.poster_path,
+      backdrop: tmdbItem.backdrop_path,
+      poster: tmdbItem.poster_path,
       popularity: tmdbItem.popularity,
-      Category: omdbItem.Type == "movie" ? "Pelicula" : "Serie",
+      category: omdbItem.Type == "movie" ? "Pelicula" : "Serie",
       country: omdbItem.Country,
-      original_title: tmdbItem.original_title,
+      title_original: tmdbItem.original_title,
       plot: tmdbItem.overview,
       year: omdbItem.Year,
 
-      externalids: {
+      external_ids: {
         imdb_id: tmdbItem.imdb_id,
         tmdb_id: String(tmdbItem.id),
         omdb_id: "",

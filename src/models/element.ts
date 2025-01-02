@@ -1,5 +1,5 @@
 import { Nprisma } from "../../prisma/prisma";
-import { createElement, editElement, Element } from "../types/element";
+import { createElement, editElement, Element, simpleElement } from "../types/element";
 
 export class ElementModel {
   static async getAll() {
@@ -18,13 +18,13 @@ export class ElementModel {
       data: {
         abstract: input.abstract,
         plot: input.plot,
-        category: input.Category,
+        category: input.category,
 
         title: input.title,
-        title_original: input.original_title,
+        title_original: input.title_original,
 
-        backdrop: input.backdrop_path,
-        poster: input.poster_path,
+        backdrop: input.backdrop,
+        poster: input.poster,
 
         year: input.year,
 
@@ -35,29 +35,29 @@ export class ElementModel {
         //Generos
         genres: {
           create: {
-            genres: input.genres.genres
-            },
+            genres: input.genres.genres,
           },
-        
+        },
+
         //ExternalIDS
         external_ids: {
           create: {
-            imdb_id: input.externalids.imdb_id,
-            tmdb_id: input.externalids.tmdb_id,
-            omdb_id: input.externalids.omdb_id,
+            imdb_id: input.external_ids.imdb_id,
+            tmdb_id: input.external_ids.tmdb_id,
+            omdb_id: input.external_ids.omdb_id,
           },
         },
-        
+
         //Ratings
         ratings: {
-          create:{
+          create: {
             imdb_rating: input.ratings.imdb_rating,
             imdb_votes: input.ratings.imdb_votes,
             mc_rating: input.ratings.mc_rating,
             mc_votes: input.ratings.mc_votes,
             rotten_rating: input.ratings.rotten_rating,
             rotten_votes: input.ratings.rotten_votes,
-          }
+          },
         },
 
         //Credits
@@ -68,11 +68,31 @@ export class ElementModel {
             },
           },
         },
-
       },
     });
   }
-  
+  static async createSimple({ input }: { input: simpleElement }) {
+    return await Nprisma.element.create({
+      data: {
+        abstract: input.abstract,
+        plot: input.plot,
+        category: input.category,
+
+        title: input.title,
+        title_original: input.title_original,
+
+        backdrop: input.backdrop,
+        poster: input.poster,
+
+        year: input.year,
+
+        popularity: input.popularity,
+
+        country: input.country,
+      },
+    });
+  }
+
   static async delete({ id }: { id: number }) {
     return await Nprisma.element.delete({
       where: {
@@ -105,11 +125,11 @@ export class ElementModel {
       },
     });
   }
-  static async findMany({IDs}){
+  static async findMany({ IDs }) {
     return await Nprisma.element.findMany({
-      where:{
-        id:IDs
-      }
-    })
+      where: {
+        id: IDs,
+      },
+    });
   }
 }

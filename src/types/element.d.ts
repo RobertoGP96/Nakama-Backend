@@ -35,26 +35,28 @@ interface createElement {
   year: string;
   country: string;
 
-  backdrop_path: string;
-  poster_path: string;
+  backdrop: string;
+  poster: string;
 
-  Category: categoryName;
+  category: categoryName;
 
   popularity: number;
 
   genres: createGenre;
 
   title: string;
-  original_title: string;
+  title_original: string;
 
   credits: createCredits ;
-  externalids: createExternalIds;
+  external_ids: createExternalIds;
   metadata:  createMetadata;
   ratings:  createRating;
 
   plot: string;
   abstract: string;
 }
+
+type simpleElement = Pick<Element, 'title' | 'title_original' | 'poster'| 'backdrop'| 'category'| 'country'| 'plot'| 'abstract'|'popularity'| 'year' >
 
 type checkElement = {
   id: null | number,

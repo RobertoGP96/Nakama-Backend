@@ -5,8 +5,9 @@ import { ElementController } from '../controllers/element'
 export const ElementRouter = Router()
 
 ElementRouter.get('/', ElementController.getAll)
-ElementRouter.get('/:id', ElementController.getByID)
-ElementRouter.post('/', ElementController.create)
+ElementRouter.get('/search/:id', ElementController.getByID)
+ElementRouter.post('/create', ElementController.create)
+ElementRouter.post('/create/s', ElementController.createSimple)
 
-ElementRouter.delete('/:id', ElementController.delete)
-ElementRouter.put('/:id', ElementController.update)
+ElementRouter.delete('/delete/:id', ElementController.delete)
+ElementRouter.put('/edit/:id', ElementController.update)
