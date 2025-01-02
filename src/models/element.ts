@@ -1,15 +1,34 @@
 import { Nprisma } from "../../prisma/prisma";
-import { createElement, editElement, Element, simpleElement } from "../types/element";
+import {
+  createElement,
+  editElement,
+  Element,
+  simpleElement,
+} from "../types/element";
 
 export class ElementModel {
   static async getAll() {
-    return await Nprisma.element.findMany();
+    return await Nprisma.element.findMany({
+      include: {
+        genres: {select:{
+          id:true,
+          genres:true
+        }},
+        ratings: true,
+        external_ids: true,
+      },
+    });
   }
 
   static async getByID({ id }: { id: number }) {
     return await Nprisma.element.findUnique({
       where: {
         id: id,
+      },
+      include: {
+        genres: true,
+        ratings: true,
+        external_ids: true,
       },
     });
   }

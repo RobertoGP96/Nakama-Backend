@@ -1,4 +1,4 @@
-import { createCast } from "./cast"
+import {Cast, createCast } from "./cast"
 
 interface Credits{
     id: number | null

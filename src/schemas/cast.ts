@@ -16,7 +16,7 @@ export const CastSchema = object({
     invalid_type_error: 'Department must be string.',
     required_error: 'Department is required.',
   }),
-  profile: string({
+  porfile: string({
     invalid_type_error: 'Porfile must be string.',
   })
 }).partial()
