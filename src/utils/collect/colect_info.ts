@@ -81,6 +81,7 @@ export class CollectInfo {
           originalName: tmp.original_name,
           character: tmp.character as string,
           department: "ACTOR",
+          porfile: tmp.profile_path as string
         });
         if (casting.length>5)
           return
@@ -96,6 +97,7 @@ export class CollectInfo {
         originalName: getDirector[0].original_name,
         character: "",
         department: "DIRECTOR",
+        porfile: getDirector[0].profile_path as string
       });
     }
 

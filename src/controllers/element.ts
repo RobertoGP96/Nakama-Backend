@@ -117,7 +117,7 @@ export class ElementController {
 
   static async search(req: Request, res: Response) {
     const filters: Filter = req.body;
-    const results = (await ElementModel.getAll()).filter((e: Element) => {
+    const results = (await ElementModel.getAll()).filter((e) => {
       return (
         filters.title.toLowerCase().includes(e.title) ||
         filters.title.toLowerCase().includes(e.title_original) ||
