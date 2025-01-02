@@ -32,9 +32,16 @@ app.disable('x-powered-by')
 //Acces key middleware
 //app.use(AuthMiddleware.verifyApiKeyToken)
 //Data
+const allowedOrigins = ['http://localhost:5173', 'https://nakamamedia.pages.dev'];
 
 const corsOptions = {
-  origin: 'http://localhost:5173', // Cambia esto por el origen que deseas permitir
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Si necesitas permitir cookies
   optionsSuccessStatus: 204 // Para navegadores antiguos
