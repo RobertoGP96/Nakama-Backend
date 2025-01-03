@@ -32,7 +32,7 @@ app.disable('x-powered-by')
 //Acces key middleware
 //app.use(AuthMiddleware.verifyApiKeyToken)
 //Data
-const allowedOrigins = ['http://localhost:5173', 'http://nakamamedia.pages.dev','nakamamedia.pages.dev'];
+const allowedOrigins = ['http://localhost:5173', 'https://nakamamedia.pages.dev','nakamamedia.pages.dev'];
 
 const corsOptions = {
   origin: (origin, callback) => {
